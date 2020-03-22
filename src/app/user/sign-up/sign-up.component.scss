@@ -1,0 +1,71 @@
+header {
+  text-align: center;
+}
+.container {
+  margin: 0 15% 10% 15%;
+}
+
+
+@media screen and (max-width: 599px) {
+
+  .sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+
+  }
+  .sign-up-form>div>mat-form-field {
+    width: 100%;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  #cancel {
+    margin-top: 5%;
+  }
+
+
+  .mat-form-field-prefix {
+    top: -0.25em !important;
+  }
+
+}
+
+
+@media screen and (min-width: 600px) {
+  .full-name,
+  .contacts,
+  .password {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+  .buttons > button {
+    width: 35%;
+    margin-top: 5%;
+  }
+
+  .description {
+    display: flex;
+    justify-content: space-around;
+
+    .mat-form-field {
+      width: 90%;
+    }
+  }
+  .mat-form-field {
+    width: 40%;
+  }
+
+}
