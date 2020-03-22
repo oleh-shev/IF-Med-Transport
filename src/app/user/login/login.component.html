@@ -1,1 +1,33 @@
-<p>login works!</p>
+<mat-card>
+  <mat-card-title>Вхід</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="userData">
+      <p>
+        <mat-form-field>
+          <mat-label>Мобільний номер</mat-label>
+          <span matPrefix>+380&nbsp;</span>
+          <input matInput type="tel" maxlength="9" formControlName="phone_number">
+          <mat-error>Введіть номер телефону</mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-label>Пароль</mat-label>
+          <input type="password" matInput formControlName="password">
+          <mat-error>Введіть пароль</mat-error>
+        </mat-form-field>
+      </p>
+
+      <!--<p *ngIf="error" class="error">
+        {{ error }}
+      </p>
+-->
+      <div class="button">
+        <button type="button" mat-button [routerLink]="['../sign-up']">Зареєструватися</button>
+        <button type="submit" mat-button [disabled]="!userData.valid" (click)="loginUser()">Увійти</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

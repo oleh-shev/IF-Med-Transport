@@ -6,13 +6,13 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {
-  MatButtonModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatToolbarModule
+    MatButtonModule, MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatToolbarModule
 } from '@angular/material';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -46,6 +46,7 @@ const routes: Routes = [
         MatIconModule,
         FormsModule,
         ReactiveFormsModule,
+        MatCardModule,
     ]
 })
 export class UserModule {
