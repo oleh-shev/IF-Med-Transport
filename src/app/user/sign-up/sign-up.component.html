@@ -3,13 +3,15 @@
     <h3>Реєстрація</h3>
   </header>
 
-  <form class="sign-up-form" [formGroup]="userData" (ngSubmit)="registerUser()">
+  <form class="sign-up-form" [formGroup]="userData">
     <div class="full-name">
       <mat-form-field>
         <input matInput placeholder="Ім'я" type="text" formControlName="first_name" required>
+        <mat-error *ngIf="userData.hasError('required', 'first_name')">Це поле є обов'язковим</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Прізвище" type="text" formControlName="last_name">
+        <input matInput placeholder="Прізвище" type="text" formControlName="last_name" required>
+        <mat-error *ngIf="userData.hasError('required', 'last_name')">Це поле є обов'язковим</mat-error>
       </mat-form-field>
     </div>
     <div class="description">
@@ -17,38 +19,69 @@
         <mat-label>Інформація про себе:</mat-label>
         <textarea matInput matTextareaAutosize
                   placeholder="Інформація про себе: Місце роботи, посада, навчання..."
+                  maxlength="256"
                   formControlName="description"></textarea>
       </mat-form-field>
     </div>
     <div class="contacts">
       <mat-form-field id="phone">
         <mat-label>Мобільний номер</mat-label>
-        <span matPrefix>+380 &nbsp;</span>
-        <input matInput placeholder="667281545" type="tel" formControlName="phone_number">
+        <span matPrefix>+380&nbsp;</span>
+        <input matInput placeholder="667281545" type="tel" maxlength="9" formControlName="phone_number" required>
+        <mat-error *ngIf="userData.hasError('required', 'phone_number')">Це поле є обов'язковим</mat-error>
+        <mat-error
+          *ngIf="userData.hasError('minlength', 'phone_number') ||
+                 userData.hasError('pattern', 'phone_number')">
+          Введено невірний формат номеру
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Email" type="email" formControlName="email">
+        <mat-label>Електронна пошта</mat-label>
+        <input matInput placeholder="ivan_shevchenko@gmail.com" type="email" formControlName="email" required>
+        <mat-error *ngIf="userData.hasError('required', 'email')">Це поле є обов'язковим</mat-error>
+        <mat-error *ngIf="userData.hasError('email', 'email')">Введено нвірний формат</mat-error>
       </mat-form-field>
     </div>
     <div class="password">
       <mat-form-field>
-        <input matInput placeholder="Пароль" [type]="hide ? 'password' : 'text'" formControlName="password">
+        <input
+          matInput placeholder="Пароль"
+          [type]="hide ? 'password' : 'text'"
+          formControlName="password" required>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
+        <mat-error *ngIf="userData.hasError('required', 'password')">Це поле є обов'язковим</mat-error>
+        <mat-error
+          *ngIf="userData.hasError('minlength', 'password')">
+          Довжина паролю має бути не меншою 8 символів
+        </mat-error>
+        <mat-error
+          *ngIf="userData.hasError('pattern', 'password')">
+          Пароль може містити тільки цифри та латинські літери
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Підтвердіть пароль" [type]="hide ? 'password' : 'text'"
-               formControlName="confirm_password">
+               formControlName="confirm_password" required>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
+        <mat-error *ngIf="userData.hasError('required', 'confirm_password')">Це поле є обов'язковим</mat-error>
+        <mat-error
+          *ngIf="userData.controls['confirm_password'].pristine ||
+          userData.controls['confirm_password'].errors?.MatchPassword">
+          Паролі не співпадають
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="buttons">
-      <button mat-stroked-button color="primary" type="submit" [disabled]="!userData.valid">Зареєструватися та Увійти
+      <button mat-stroked-button color="primary"
+              type="submit"
+              [disabled]="!userData.valid"
+              (click)="registerUser()">Зареєструватися та Увійти
       </button>
       <button mat-stroked-button color="primary" type="button" id="cancel">Відміна</button>
     </div>

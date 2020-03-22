@@ -1,33 +1,41 @@
+header {
+  text-align: center;
+}
 .container {
   margin: 0 15% 10% 15%;
 }
 
-header {
-  text-align: center;
+
+@media screen and (max-width: 599px) {
+
+  .sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+
+  }
+  .sign-up-form>div>mat-form-field {
+    width: 100%;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  #cancel {
+    margin-top: 5%;
+  }
+
+
+  .mat-form-field-prefix {
+    top: -0.25em !important;
+  }
+
 }
 
-.sign-up-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
-
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-#cancel {
-  margin-top: 5%;
-}
-
-
-.mat-form-field-prefix {
-  top: -0.25em !important;
-}
 
 @media screen and (min-width: 600px) {
   .full-name,
@@ -45,10 +53,9 @@ header {
   }
   .buttons > button {
     width: 35%;
+    margin-top: 5%;
   }
-  #cancel {
-    margin-top: 0;
-  }
+
   .description {
     display: flex;
     justify-content: space-around;
