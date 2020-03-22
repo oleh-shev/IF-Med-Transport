@@ -1,9 +1,11 @@
 .container {
   margin: 0 15% 10% 15%;
 }
+
 header {
   text-align: center;
 }
+
 .sign-up-form {
   display: flex;
   flex-direction: column;
@@ -11,13 +13,20 @@ header {
   text-align: center;
 
 }
+
 .buttons {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
+
 #cancel {
   margin-top: 5%;
+}
+
+
+.mat-form-field-prefix {
+  top: -0.25em !important;
 }
 
 @media screen and (min-width: 600px) {
@@ -34,15 +43,16 @@ header {
     justify-content: space-around;
     flex-direction: row;
   }
-  .buttons>button {
-   width: 30%;
- }
+  .buttons > button {
+    width: 35%;
+  }
   #cancel {
     margin-top: 0;
   }
   .description {
     display: flex;
     justify-content: space-around;
+
     .mat-form-field {
       width: 90%;
     }
