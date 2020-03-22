@@ -7,6 +7,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import {MatButtonModule, MatListModule, MatMenuModule, MatToolbarModule} from '@angular/material';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { PassBoardComponent } from './pass-board/pass-board.component';
 
 const routes: Routes = [
   /*{
@@ -38,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UserComponent, LoginComponent, SignUpComponent, HomeComponent, ToolbarComponent],
+  declarations: [UserComponent, LoginComponent, SignUpComponent, HomeComponent, ToolbarComponent, PassBoardComponent],
   exports: [
     UserComponent
   ],
