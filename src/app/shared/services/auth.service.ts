@@ -2,13 +2,13 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, switchMap, tap} from 'rxjs/operators';
 import {Tokens} from '../entity.interface';
-import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-private isLogged = new EventEmitter();
+  private isLogged = new EventEmitter();
+
   constructor(
     private http: HttpClient
   ) {
@@ -42,7 +42,7 @@ private isLogged = new EventEmitter();
 
   logOut() {
     return this.http.post('auth/jwt/blacklist/', {
-      'refresh': this.refreshToken
+      refresh: this.refreshToken
     }).pipe(
       tap(response => {
         this.isLogged.emit(false);
@@ -50,8 +50,6 @@ private isLogged = new EventEmitter();
       })
     );
   }
-
-
 
 
   get accessToken(): string {
@@ -74,5 +72,16 @@ private isLogged = new EventEmitter();
     localStorage.removeItem('access');
     localStorage.removeItem('refresh');
   }
+
+  getNewAccessToken() {
+    return this.http.post('auth/jwt/refresh/', {
+      refresh: this.refreshToken
+    }).pipe(
+      tap((token: Tokens) => {
+        return this.accessToken = token.access;
+      })
+    );
+  }
+
 
 }
