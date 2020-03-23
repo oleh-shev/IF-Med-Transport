@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PasswordValidation} from '../../shared/services/password-validator';
+import {AuthService} from '../../shared/services/auth.service';
+import {Router} from '@angular/router';
+import {User} from '../../shared/entity.interface';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,9 +14,20 @@ export class SignUpComponent implements OnInit {
 
   hide = true;
   userData: FormGroup;
+  listOfErrors: User = {
+    first_name: '',
+    last_name: '',
+    description: '',
+    email: '',
+    phone_number: '',
+    password: ''
+  };
+
   constructor(
     private fb: FormBuilder,
-    ) {
+    private authService: AuthService,
+    private route: Router,
+  ) {
     this.userData = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
@@ -26,6 +40,7 @@ export class SignUpComponent implements OnInit {
       validator: PasswordValidation.MatchPassword
     });
   }
+
   ngOnInit() {
   }
 
@@ -33,7 +48,13 @@ export class SignUpComponent implements OnInit {
     const data = this.userData.value;
     delete data.confirm_password;
     data.phone_number = `+380${data.phone_number}`;
-    console.log(data);
+    this.authService.signUp(data).subscribe(response => {
+      this.route.navigate(['home']);
+    }, err => {
+      const errors: User = err.error;
+      this.listOfErrors = {...this.listOfErrors, ...errors};
+      console.log(this.listOfErrors);
+    });
   }
 
 }
