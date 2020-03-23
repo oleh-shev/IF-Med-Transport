@@ -18,11 +18,7 @@
           <mat-error>Введіть пароль</mat-error>
         </mat-form-field>
       </p>
-
-      <!--<p *ngIf="error" class="error">
-        {{ error }}
-      </p>
--->
+      <mat-error *ngIf="listOfErrors.length > 0"><b>{{listOfErrors}}</b></mat-error>
       <div class="button">
         <button type="button" mat-button [routerLink]="['../sign-up']">Зареєструватися</button>
         <button type="submit" mat-button [disabled]="!userData.valid" (click)="loginUser()">Увійти</button>
@@ -31,3 +27,4 @@
     </form>
   </mat-card-content>
 </mat-card>
+
