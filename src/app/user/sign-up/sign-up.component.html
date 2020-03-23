@@ -37,8 +37,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Електронна пошта</mat-label>
-        <input matInput placeholder="ivan_shevchenko@gmail.com" type="email" formControlName="email" required>
-        <mat-error *ngIf="userData.hasError('required', 'email')">Це поле є обов'язковим</mat-error>
+        <input matInput placeholder="ivan_shevchenko@gmail.com" type="email" formControlName="email">
         <mat-error *ngIf="userData.hasError('email', 'email')">Введено нвірний формат</mat-error>
       </mat-form-field>
     </div>

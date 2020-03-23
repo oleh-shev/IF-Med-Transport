@@ -2,11 +2,14 @@
   <div class="home-button">
     <a mat-button routerLink="home">Головна</a>
   </div>
-  <div class="auth-button">
+  <div class="auth-button" *ngIf="!isLogged">
     <button mat-button [matMenuTriggerFor]="menu">Авторизація</button>
     <mat-menu #menu="matMenu">
       <a mat-menu-item routerLink="login">Увійти</a>
       <a mat-menu-item routerLink="sign-up">Зареєструватися</a>
     </mat-menu>
+  </div>
+  <div *ngIf="isLogged">
+    <button mat-button (click)="logOut()">Вийти</button>
   </div>
 </mat-toolbar>
