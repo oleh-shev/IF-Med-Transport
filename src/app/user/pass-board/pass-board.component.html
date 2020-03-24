@@ -1,1 +1,19 @@
-<p>pass-board works!</p>
+<div class="container">
+    <h1 class="title">Список доступних поїздок</h1>
+    <div class="lists">
+        <ul *ngFor="let trip of futureActiveTrips">
+            <li>Стан: {{trip.state}}</li> 
+            <li>Час відправлення: {{trip.departure_time}}</li>
+            <li>Водій: {{trip.driver.name}}</li>
+            <li>Опис транспортного засобу: {{trip.car_description}}</li>
+            <li>Коментар водія: {{trip.departure_time}}</li>
+            <li>Доступно місць: {{trip.current_available_places}}</li>
+            <li>Звідки: {{trip.from_location_1}}</li>
+            <li *ngIf="trip.from_location_2">Звідки: {{trip.from_location_1}}</li>
+            <li>Уточнення по місцю посадки: {{trip.from_text_description}} </li>
+            <li>Куди : {{trip.to_location_1}}</li>
+            <li *ngIf="trip.to_location_2">Куди: {{trip.from_location_1}}</li>
+            <li>Уточнення по місцю висадки: {{trip.to_text_description}} </li>
+        </ul>
+    </div>
+</div>
