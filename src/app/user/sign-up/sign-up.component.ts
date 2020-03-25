@@ -28,7 +28,7 @@ export class SignUpComponent implements OnInit {
       description: ['', Validators.maxLength(200)],
       phone_number: ['', [Validators.required, Validators.minLength(9), Validators.pattern('^[ 0-9]+$')]],
       password: ['', [Validators.required, Validators.minLength(8),
-        Validators.pattern('^(?=.*[A-Za-zА-Яа-яЇїҐґ])(?!^\\d+$)^.{7,}$')]],
+        Validators.pattern('(?!^\\d+$)^.+$')]],
       confirm_password: ['', [Validators.required, Validators.minLength(8)]]
     }, {
       validator: PasswordValidation.MatchPassword

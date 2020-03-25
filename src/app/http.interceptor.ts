@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../environments/environment';
 import {AuthService} from './shared/services/auth.service';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 import {error} from 'util';
 import {Tokens} from './shared/entity.interface';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 
@@ -15,7 +16,8 @@ export class ApiHttpInterceptor implements HttpInterceptor {
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
   ) {
   }
 
@@ -29,7 +31,10 @@ export class ApiHttpInterceptor implements HttpInterceptor {
     return next.handle(apiReq).pipe(
       catchError(err => {
         if (err instanceof HttpErrorResponse && err.status === 401) {
-            return this.handle401Error(apiReq, next);
+          return this.handle401Error(apiReq, next);
+        } else if (err instanceof HttpErrorResponse && err.status === 400) {
+          this.openSnackBar();
+          this.isRefreshing = false;
         } else {
           throw error(err);
         }
@@ -47,6 +52,7 @@ export class ApiHttpInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+    console.log(this.isRefreshing);
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
@@ -69,5 +75,9 @@ export class ApiHttpInterceptor implements HttpInterceptor {
     }
   }
 
-
+  openSnackBar() {
+    this.snackBar.open('Ця дія доступна тільки для авторизованих користувачів', 'X', {
+      duration: 6000,
+    });
+  }
 }
