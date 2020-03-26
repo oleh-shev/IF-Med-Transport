@@ -1,19 +1,36 @@
 <div class="container">
+    <h1>Мої поїздки</h1>
+    <div class="lists">
+
+    </div>
     <h1 class="title">Список доступних поїздок</h1>
     <div class="lists">
-        <ul *ngFor="let trip of futureActiveTrips">
+        <!-- <ul *ngFor="let trip of futureActiveTrips">
             <li>Стан: {{trip.state}}</li> 
-            <li>Час відправлення: {{trip.departure_time}}</li>
+            <li>Час відправлення: {{trip.departure_time | date:"dd.MM - hh:mm"}}</li>
             <li>Водій: {{trip.driver.name}}</li>
             <li>Опис транспортного засобу: {{trip.car_description}}</li>
-            <li>Коментар водія: {{trip.departure_time}}</li>
+            <li>Коментар водія: {{trip.driver_comments}}</li>
             <li>Доступно місць: {{trip.current_available_places}}</li>
-            <li>Звідки: {{trip.from_location_1}}</li>
-            <li *ngIf="trip.from_location_2">Звідки: {{trip.from_location_1}}</li>
+            <li>Звідки: {{trip.from_location_1.name}}</li>
+            <li *ngIf="trip.from_location_2">Звідки: {{trip.from_location_2.name}}</li>
             <li>Уточнення по місцю посадки: {{trip.from_text_description}} </li>
-            <li>Куди : {{trip.to_location_1}}</li>
-            <li *ngIf="trip.to_location_2">Куди: {{trip.from_location_1}}</li>
+            <li>Куди : {{trip.to_location_1.name}}</li>
+            <li *ngIf="trip.to_location_2">Куди: {{trip.to_location_2.name}}</li>
             <li>Уточнення по місцю висадки: {{trip.to_text_description}} </li>
+        </ul> -->
+        <ul>
+            <li *ngFor="let trip of futureActiveTrips">
+                {{trip.departure_time | date:"dd.MM - hh:mm"}} - 
+                {{trip.from_location_1.name}} <span *ngIf="trip.from_location_2">({{trip.from_location_2.name}})</span>
+                - {{trip.to_location_1.name}} <span *ngIf="trip.to_location_2">({{trip.to_location_2.name}}) - 
+                доступно місць: {{trip.current_available_places}}
+                </span>
+                <span class="detailTrip">Водій: {{trip.driver.name}} ({{trip.car_description}})
+
+            Коментар водія: {{trip.driver_comments}}
+            Уточнення по місцю посадки: {{trip.from_text_description}}
+            Уточнення по місцю висадки: {{trip.to_text_description}} </span> </li>
         </ul>
     </div>
 </div>

@@ -31,6 +31,9 @@ export interface Trip {
   to_location_1: number;
   to_location_2: number;
   to_text_description: string;
+  reserve_places_url?: string;
+  cancel_url?: string;
+  complete_url?: string;
 }
 
 export interface SubLocation {
