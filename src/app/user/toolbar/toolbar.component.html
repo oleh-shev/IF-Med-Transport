@@ -1,15 +1,36 @@
 <mat-toolbar color="primary">
-  <div class="home-button">
-    <a mat-button routerLink="home">Головна</a>
+  <div class="header-home-button">
+    <a mat-button routerLink="">Головна</a>
   </div>
-  <div class="auth-button" *ngIf="!isLogged">
-    <button mat-button [matMenuTriggerFor]="menu">Авторизація</button>
-    <mat-menu #menu="matMenu">
-      <a mat-menu-item routerLink="login">Увійти</a>
-      <a mat-menu-item routerLink="sign-up">Зареєструватися</a>
-    </mat-menu>
-  </div>
-  <div *ngIf="isLogged">
-    <button mat-button (click)="logOut()">Вийти</button>
+  <div class="header-menu">
+    <ng-container *ngIf="!isLogged">
+      <button mat-button [matMenuTriggerFor]="menu">Авторизація</button>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item routerLink="login">Увійти</a>
+        <a mat-menu-item routerLink="sign-up">Зареєструватися</a>
+      </mat-menu>
+    </ng-container>
+    <ng-container *ngIf="isLogged">
+      <button *ngIf="isLogged" mat-button [matMenuTriggerFor]="profile_menu">
+        User
+        <span class="material-icons">
+          account_circle
+        </span>
+      </button>
+      <mat-menu #profile_menu="matMenu">
+        <button mat-menu-item [routerLink]="['profile']">
+          <div class="profile-menu-items">
+            <span class="material-icons">account_box </span>
+            <span class="profile-menu-item-text">Профіль</span>
+          </div>
+        </button>
+        <button mat-menu-item (click)="logOut()">
+          <div class="profile-menu-items">
+            <span class="material-icons">exit_to_app</span>
+            <span class="profile-menu-item-text">Вийти</span>
+          </div>
+        </button>
+      </mat-menu>
+    </ng-container>
   </div>
 </mat-toolbar>

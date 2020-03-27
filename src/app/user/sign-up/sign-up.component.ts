@@ -43,7 +43,7 @@ export class SignUpComponent implements OnInit {
     delete data.confirm_password;
     data.phone_number = `+380${data.phone_number}`;
     this.authService.signUp(data).subscribe(response => {
-      this.route.navigate(['home']);
+      this.route.navigate(['']);
     }, err => {
       const errors: User = err.error;
       Object.keys(errors).forEach(prop => {

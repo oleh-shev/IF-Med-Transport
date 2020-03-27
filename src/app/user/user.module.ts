@@ -11,8 +11,8 @@ import { MaterialModule } from '../shared/material-module/material.module';
 import { UserProfileComponent } from './user-profile/user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
+  { path: 'profile', component: UserProfileComponent},
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent }
 ];
