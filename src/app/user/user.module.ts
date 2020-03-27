@@ -16,6 +16,7 @@ import {
 } from '@angular/material';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AddTripComponent } from './add-trip/add-trip.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UserComponent, LoginComponent, SignUpComponent, HomeComponent, ToolbarComponent],
+  declarations: [UserComponent, LoginComponent, SignUpComponent, HomeComponent, ToolbarComponent, AddTripComponent],
   exports: [
     UserComponent
   ],
