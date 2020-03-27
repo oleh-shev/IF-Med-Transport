@@ -8,10 +8,16 @@
       <mat-form-field>
         <input matInput placeholder="Ім'я" type="text" formControlName="first_name" required>
         <mat-error *ngIf="userData.hasError('required', 'first_name')">Це поле є обов'язковим</mat-error>
+        <mat-error *ngIf="userData.hasError('serverError', 'first_name')">
+          {{userData.get('first_name').errors?.serverError}}
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Прізвище" type="text" formControlName="last_name" required>
         <mat-error *ngIf="userData.hasError('required', 'last_name')">Це поле є обов'язковим</mat-error>
+        <mat-error *ngIf="userData.hasError('serverError', 'last_name')">
+          {{userData.get('last_name').errors?.serverError}}
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="description">
@@ -19,8 +25,11 @@
         <mat-label>Інформація про себе:</mat-label>
         <textarea matInput matTextareaAutosize
                   placeholder="Інформація про себе: Місце роботи, посада, навчання..."
-                  maxlength="256"
+                  maxlength="200"
                   formControlName="description"></textarea>
+        <mat-error *ngIf="userData.hasError('serverError', 'description')">
+          {{userData.get('description').errors?.serverError}}
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="contacts">
@@ -34,23 +43,33 @@
                  userData.hasError('pattern', 'phone_number')">
           Введено невірний формат номеру
         </mat-error>
+        <mat-error *ngIf="userData.hasError('serverError', 'phone_number')">
+          {{userData.get('phone_number').errors?.serverError}}
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Електронна пошта</mat-label>
         <input matInput placeholder="ivan_shevchenko@gmail.com" type="email" formControlName="email">
         <mat-error *ngIf="userData.hasError('email', 'email')">Введено нвірний формат</mat-error>
+        <mat-error *ngIf="userData.hasError('serverError', 'email')">
+          {{userData.get('email').errors?.serverError}}
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="password">
       <mat-form-field>
         <input
+          name="password"
           matInput placeholder="Пароль"
           [type]="hide ? 'password' : 'text'"
+          (focus)="passwordFocus = true"
+          (focusout)="passwordFocus = false"
           formControlName="password" required>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
+        <mat-hint *ngIf="passwordFocus">Пароль має бути довжиною не менше 8 символів та не може складатися тільки з цифер</mat-hint>
         <mat-error *ngIf="userData.hasError('required', 'password')">Це поле є обов'язковим</mat-error>
         <mat-error
           *ngIf="userData.hasError('minlength', 'password')">
@@ -58,7 +77,10 @@
         </mat-error>
         <mat-error
           *ngIf="userData.hasError('pattern', 'password')">
-          Пароль може містити тільки цифри та латинські літери
+          Пароль не може складатися тільки з цифер
+        </mat-error>
+        <mat-error *ngIf="userData.hasError('serverError', 'password')">
+          {{userData.get('password').errors?.serverError}}
         </mat-error>
       </mat-form-field>
       <mat-form-field>

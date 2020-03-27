@@ -14,14 +14,7 @@ export class SignUpComponent implements OnInit {
 
   hide = true;
   userData: FormGroup;
-  listOfErrors: User = {
-    first_name: '',
-    last_name: '',
-    description: '',
-    email: '',
-    phone_number: '',
-    password: ''
-  };
+  passwordFocus: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -32,9 +25,10 @@ export class SignUpComponent implements OnInit {
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.email]],
-      description: ['', Validators.maxLength(256)],
+      description: ['', Validators.maxLength(200)],
       phone_number: ['', [Validators.required, Validators.minLength(9), Validators.pattern('^[ 0-9]+$')]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('^[a-zA-Z0-9_]*$')]],
+      password: ['', [Validators.required, Validators.minLength(8),
+        Validators.pattern('(?!^\\d+$)^.+$')]],
       confirm_password: ['', [Validators.required, Validators.minLength(8)]]
     }, {
       validator: PasswordValidation.MatchPassword
@@ -52,8 +46,14 @@ export class SignUpComponent implements OnInit {
       this.route.navigate(['home']);
     }, err => {
       const errors: User = err.error;
-      this.listOfErrors = {...this.listOfErrors, ...errors};
-      console.log(this.listOfErrors);
+      Object.keys(errors).forEach(prop => {
+        const formControl = this.userData.get(prop);
+        if (formControl) {
+          formControl.setErrors({
+            serverError: errors[prop]
+          });
+        }
+      });
     });
   }
 
