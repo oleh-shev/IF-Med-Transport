@@ -26,11 +26,17 @@
                 - {{trip.to_location_1.name}} <span *ngIf="trip.to_location_2">({{trip.to_location_2.name}}) - 
                 доступно місць: {{trip.current_available_places}}
                 </span>
-                <span class="detailTrip">Водій: {{trip.driver.name}} ({{trip.car_description}})
 
-            Коментар водія: {{trip.driver_comments}}
-            Уточнення по місцю посадки: {{trip.from_text_description}}
-            Уточнення по місцю висадки: {{trip.to_text_description}} </span> </li>
+                <div class="detailTrip">
+                    <div>Водій: {{trip.driver.name}} ({{trip.car_description}})</div>
+                    <div>Коментар водія: {{trip.driver_comments}}</div>
+                    <div>Заберу: {{trip.from_text_description}}</div>
+                    <div>Довезу до: {{trip.to_text_description}}</div>
+                </div>
+                <button (click)="changeViewDetail($event)">Детально</button>
+                <button>Зарезервувати</button>
+                <button>Відмінити</button>
+         </li>
         </ul>
     </div>
 </div>

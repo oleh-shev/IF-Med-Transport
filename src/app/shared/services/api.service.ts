@@ -14,5 +14,8 @@ export class ApiService {
   getFutureActiveTrips(): Observable<any> {
     return this.http.get(`${this.apiURI}future_active_trips`);
   }
+  getInfoAboutMe(): Observable<any> {
+    return this.http.get(`${this.apiURI}auth/users/me/`);
+  }
 
 }
