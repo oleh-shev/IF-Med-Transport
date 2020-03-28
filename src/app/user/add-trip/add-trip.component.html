@@ -1,1 +1,122 @@
-<p>add-trip works!</p>
+<div class="container">
+  <header>
+    <h3>Створити поїздку</h3>
+  </header>
+
+  <form [formGroup]="tripData" class="trip-form">
+    <div class="departure">
+      <mat-form-field>
+        <mat-label>Дата Поїздки</mat-label>
+        <input matInput [matDatepicker]="picker" [min]="currDate" formControlName="date" (click)="picker.open()"
+               readonly required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+        <mat-error *ngIf="tripData.hasError('required', 'date')">Це поле є обов'язковим</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Час Відправлення</mat-label>
+        <input matInput placeholder="09:35" formControlName="time" required>
+        <mat-error *ngIf="tripData.hasError('required', 'time')">Це поле є обов'язковим</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="location-from">
+      <mat-form-field>
+        <mat-label>Виберіть пункт відправлення</mat-label>
+        <mat-select formControlName="from_location_1"
+                    #location_from
+                    (selectionChange)="formSubLocations(location_from.value, true)" required>
+          <mat-option *ngFor="let location of locations" [value]="location.id">
+            {{location.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="tripData.hasError('required', 'from_location_1')">Це поле є обов'язковим</mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="subLocationsFromAvailable">
+        <mat-label>Додатково (мікрорайон, село...)</mat-label>
+        <mat-select formControlName="from_location_2">
+          <mat-option [value]="''">{{''}}</mat-option>
+          <mat-option *ngFor="let location of subLocationsFrom"
+                      [value]="location.id">{{location.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="!subLocationsFromAvailable" class="no-sub-loc">
+        <mat-label>Додатково (мікрорайон, село...)</mat-label>
+        <textarea matInput matTextareaAutosize readonly
+                  matTooltip="Ви можете внести додаткову інформацію полем нижче" matTooltipHideDelay="2000"
+        >Додаткова інформація відсутня</textarea>
+      </mat-form-field>
+    </div>
+    <div class="comment">
+      <mat-form-field>
+        <mat-label>Коментар до пункту відправлення</mat-label>
+        <textarea matInput matTextareaAutosize formControlName="from_text_description" maxlength="150"
+                  required></textarea>
+        <mat-error *ngIf="tripData.hasError('required', 'from_text_description')">
+          Це поле є обов'язковим
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="location-to">
+      <mat-form-field>
+        <mat-label>Виберіть пункт призначення</mat-label>
+        <mat-select formControlName="to_location_1" #location_to
+                    (selectionChange)="formSubLocations(location_to.value, false)" required>
+          <mat-option *ngFor="let location of locations" [value]="location.id">
+            {{location.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="tripData.hasError('required', 'to_location_1')">Це поле є обов'язковим</mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="subLocationsToAvailable">
+        <mat-label>Додатково (мікрорайон, село...)</mat-label>
+        <mat-select formControlName="to_location_2">
+          <mat-option [value]="''">{{''}}</mat-option>
+          <mat-option *ngFor="let location of subLocationsTo" [value]="location.id">
+            {{location.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="!subLocationsToAvailable" class="no-sub-loc">
+        <mat-label>Додатково (мікрорайон, село...)</mat-label>
+        <textarea matInput matTextareaAutosize readonly matTooltip="Ви можете внести додаткову інформацію полем нижче"
+                  matTooltipHideDelay="2000"
+        >Додаткова інформація відсутня</textarea>
+      </mat-form-field>
+    </div>
+    <div class="comment">
+      <mat-form-field>
+        <mat-label>Коментар до пункту призначення</mat-label>
+        <textarea matInput matTextareaAutosize formControlName="to_text_description" maxlength="150"
+                  required></textarea>
+        <mat-error *ngIf="tripData.hasError('required', 'to_text_description')">
+          Це поле є обов'язковим
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="car">
+      <mat-form-field>
+        <mat-label>Авто (Опис)</mat-label>
+        <textarea matInput matTextareaAutosize placeholder="Білий ВАЗ-2107" formControlName="car_description"
+                  maxlength="100" required></textarea>
+        <mat-error *ngIf="tripData.hasError('required', 'car_description')">Це поле є обов'язковим</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Кількість місць</mat-label>
+        <input matInput type="number" min="1" required formControlName="available_places">
+        <mat-error *ngIf="tripData.hasError('required', 'available_places')">Це поле є обов'язковим</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="comment">
+      <mat-form-field>
+        <mat-label>Кометар до Поїздки</mat-label>
+        <textarea matInput matTextareaAutosize formControlName="driver_comments" maxlength="500"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="buttons">
+      <button mat-stroked-button color="primary" type="submit" [disabled]="!tripData.valid" (click)="onSubmit()">
+        Створити
+      </button>
+      <button mat-stroked-button color="warn" type="button" id="cancel" [routerLink]="['../home']">Відміна</button>
+    </div>
+  </form>
+</div>

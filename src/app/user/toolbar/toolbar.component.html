@@ -10,6 +10,7 @@
     </mat-menu>
   </div>
   <div *ngIf="isLogged">
+    <button mat-button [routerLink]="['../add-trip']">Створити поїздку</button>
     <button mat-button (click)="logOut()">Вийти</button>
   </div>
 </mat-toolbar>
