@@ -118,6 +118,11 @@ export class PassBoardComponent implements OnInit {
   private reservePlaces(value) {
     let { id, ...payload }  = value;
     payload.passenger = this.passenger;
-    this.apiservice.createReservePlaces(id, payload).subscribe(res => console.log(res));
+    this.apiservice.createReservePlaces(id, payload).subscribe(res => {
+      if (res) {
+        this.userReservationTrips.push(res);
+        this.futureActiveTrips.filter( item => item.id === res.trip);
+      }
+    });
   }
 }

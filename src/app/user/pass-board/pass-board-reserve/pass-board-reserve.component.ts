@@ -31,11 +31,9 @@ export class PassBoardReserveComponent implements OnInit {
   }
 
   onSubmit(id: string) {
-    const result = {};
-    result.id = id;
-    result.places_number = this.reservePlaceForm.value.places_number[0];
-    result.passenger_comments = this.reservePlaceForm.value.passenger_comments;
-    this.dialogRef.close(result);
+    const places_number = this.reservePlaceForm.value.places_number[0];
+    const passenger_comments = this.reservePlaceForm.value.passenger_comments;
+    this.dialogRef.close({id, places_number, passenger_comments});
   }
 
   onDismiss() {
