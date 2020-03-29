@@ -12,7 +12,7 @@
     </ng-container>
     <ng-container *ngIf="isLogged">
       <button *ngIf="isLogged" mat-button [matMenuTriggerFor]="profile_menu">
-        User
+        {{(authService.currentUser | async)?.first_name  }}
         <span class="material-icons">
           account_circle
         </span>

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
+import { switchMap } from 'rxjs/operators';
+import { User } from 'src/app/shared/entity.interface';
 
 @Component({
   selector: 'app-toolbar',
@@ -17,11 +19,17 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription = this.authService.isUserLogged().subscribe(data => {
-      this.isLogged = data;
+    this.subscription = this.authService.isUserLogged()
+    .pipe(
+      switchMap(data => {
+        this.isLogged = data;
+        return this.authService.getUserInfo();
+      })
+    )
+    .subscribe((data: User) => {
+      this.authService.currentUser.next(data);
     });
   }
-
   logOut() {
     this.authService.logOut().subscribe();
   }

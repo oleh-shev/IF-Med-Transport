@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material-module/material.module';
 import { UserProfileComponent } from './user-profile/user-profile/user-profile.component';
 
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'profile', component: UserProfileComponent},
@@ -28,7 +29,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MaterialModule
-  ]
+  ],
+  providers: []
 })
 export class UserModule {
 }
