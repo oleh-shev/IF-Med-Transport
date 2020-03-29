@@ -6,16 +6,22 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {
-  MatButtonModule, MatCardModule, MatDatepickerModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule, MatNativeDateModule, MatSelectModule,
-  MatToolbarModule, MatTooltipModule
+    MatButtonModule, MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 } from '@angular/material';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { PassBoardComponent } from './pass-board/pass-board.component'
 import { AddTripComponent } from './add-trip/add-trip.component';
 
 const routes: Routes = [
@@ -34,28 +40,36 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UserComponent, LoginComponent, SignUpComponent, HomeComponent, ToolbarComponent, AddTripComponent],
+  declarations: [
+    UserComponent,
+    LoginComponent,
+    SignUpComponent,
+    HomeComponent,
+    ToolbarComponent,
+    PassBoardComponent,
+    AddTripComponent,
+  ],
   exports: [
     UserComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatToolbarModule,
-    MatListModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatTooltipModule,
-  ],
+    imports: [
+      CommonModule,
+      RouterModule.forChild(routes),
+      MatToolbarModule,
+      MatListModule,
+      MatButtonModule,
+      MatMenuModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatIconModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatCardModule,
+      MatOptionModule,
+      MatSelectModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
+    ]
 })
 export class UserModule {
 }
