@@ -6,12 +6,14 @@ export interface Tokens {
 }
 
 export interface User {
+  id?: string;
   first_name: string;
   last_name: string;
   email: string;
   description: string;
   phone_number: string;
-  password: string;
+  password?: string;
+  photo?: string;
 }
 
 export interface FutureTrip {

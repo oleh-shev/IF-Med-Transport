@@ -6,23 +6,18 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {
-    MatButtonModule, MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatTooltipModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
+  MatButtonModule, MatCardModule, MatFormFieldModule,
+  MatIconModule, MatInputModule, MatListModule,
+  MatMenuModule, MatToolbarModule, MatOptionModule,
+  MatSelectModule, MatTooltipModule, MatDatepickerModule,
+  MatNativeDateModule,
 } from '@angular/material';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PassBoardComponent } from './pass-board/pass-board.component'
 import { AddTripComponent } from './add-trip/add-trip.component';
+import { PassBoardReserveComponent } from './pass-board/pass-board-reserve/pass-board-reserve.component';
+import { PassBoardService } from './pass-board/pass-board.service';
 
 const routes: Routes = [
   {
@@ -48,28 +43,35 @@ const routes: Routes = [
     ToolbarComponent,
     PassBoardComponent,
     AddTripComponent,
+    PassBoardReserveComponent,
   ],
   exports: [
     UserComponent
   ],
-    imports: [
-      CommonModule,
-      RouterModule.forChild(routes),
-      MatToolbarModule,
-      MatListModule,
-      MatButtonModule,
-      MatMenuModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatIconModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatCardModule,
-      MatOptionModule,
-      MatSelectModule,
-      MatDatepickerModule,
-      MatNativeDateModule,
-    ]
+  providers: [
+    PassBoardService,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatToolbarModule,
+    MatListModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ],
+  entryComponents: [
+    PassBoardReserveComponent,
+  ]
 })
 export class UserModule {
 }

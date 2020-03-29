@@ -14,8 +14,21 @@ export class ApiService {
   getFutureActiveTrips(): Observable<any> {
     return this.http.get(`${this.apiURI}future_active_trips`);
   }
+
   getInfoAboutMe(): Observable<any> {
     return this.http.get(`${this.apiURI}auth/users/me/`);
+  }
+
+  getLocations(): Observable<any> {
+    return this.http.get(`${this.apiURI}locations/`);
+  }
+
+  getUserReservations(): Observable<any> {
+    return this.http.get(`${this.apiURI}trips/user_reservations/`);
+  }
+
+  createReservePlaces(id: string, payload): Observable<any> {
+    return this.http.post(`${this.apiURI}trips/${id}/reserve_places/`, payload)
   }
 
 }

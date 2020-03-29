@@ -1,12 +1,43 @@
 <div class="container">
   <h1>Мої поїздки</h1>
-  <div class="lists"></div>
+  <div class="list" *ngFor="let userTrip of userReservationTrips">
+    <div class="list__state">{{ userTrip.state }}</div>
+    <div class="list__info">
+      {{ userTrip.trip.departure_time | date: "dd.MM - hh:mm" }} -
+      {{ userTrip.trip.from_location_1.name }}
+      <span *ngIf="userTrip.trip.from_location_2"
+        >({{ userTrip.trip.from_location_2.name }})</span
+      >
+      - {{ userTrip.trip.to_location_1.name }}
+      <span *ngIf="userTrip.trip.to_location_2"
+        >({{ userTrip.trip.to_location_2.name }})
+      </span>
+    </div>
+    <div class="list__detailTrip">
+      <div>
+        Водій: {{ userTrip.trip.driver.name }} ({{
+          userTrip.trip.car_description
+        }})
+      </div>
+      <div>Коментар водія: {{ userTrip.trip.driver_comments }}</div>
+      <div>Заберу: {{ userTrip.trip.from_text_description }}</div>
+      <div>Довезу до: {{ userTrip.trip.to_text_description }}</div>
+    </div>
+    <div class="list__button">
+      <button (click)="changeViewDetail($event)">Детально</button>
+      <button>Відмовитися</button>
+    </div>
+  </div>
+
   <h1 class="title">Доступні поїздки</h1>
   <div class="search-box">
     <form [formGroup]="searchForm">
       <mat-form-field class="example-full-width">
         <mat-label>Звідки</mat-label>
-        <mat-select formControlName="from_location" placeholder="Пункт відправлення">
+        <mat-select
+          formControlName="from_location"
+          placeholder="Пункт відправлення"
+        >
           <mat-option *ngFor="let item of listLocationFrom" [value]="item.id">
             {{ item.name }}
           </mat-option>
@@ -17,11 +48,11 @@
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <mat-label>Куди</mat-label>
-        <mat-select formControlName="to_location" placeholder="Пунк призначення">
-          <mat-option
-            *ngFor="let item of listLocationTo"
-            [value]="item.id"
-          >
+        <mat-select
+          formControlName="to_location"
+          placeholder="Пунк призначення"
+        >
+          <mat-option *ngFor="let item of listLocationTo" [value]="item.id">
             {{ item.name }}
           </mat-option>
         </mat-select>
@@ -30,33 +61,25 @@
         </mat-error>
       </mat-form-field>
     </form>
-    <div class="lists">
-      <ul>
-        <li *ngFor="let trip of futureActiveTrips">
-          {{ trip.departure_time | date: "dd.MM - hh:mm" }} -
-          {{ trip.from_location_1.name }}
-          <span *ngIf="trip.from_location_2"
-            >({{ trip.from_location_2.name }})</span
-          >
-          - {{ trip.to_location_1.name }}
-          <span *ngIf="trip.to_location_2"
-            >({{ trip.to_location_2.name }}) - доступно місць:
-            {{ trip.current_available_places }}
-          </span>
-
-          <div class="detailTrip">
-            <div>
-              Водій: {{ trip.driver.name }} ({{ trip.car_description }})
-            </div>
-            <div>Коментар водія: {{ trip.driver_comments }}</div>
-            <div>Заберу: {{ trip.from_text_description }}</div>
-            <div>Довезу до: {{ trip.to_text_description }}</div>
-          </div>
-          <button (click)="changeViewDetail($event)">Детально</button>
-          <button>Зарезервувати</button>
-          <button>Відмінити</button>
-        </li>
-      </ul>
+  </div>
+  <div class="list" *ngFor="let trip of futureActiveTrips">
+    <div class="list__info">
+      {{ trip.departure_time | date: "dd.MM - hh:mm" }} -
+      {{ trip.from_location_1.name }}
+      <span *ngIf="trip.from_location_2">({{ trip.from_location_2.name }})</span>
+      - {{ trip.to_location_1.name }}
+      <span *ngIf="trip.to_location_2">({{ trip.to_location_2.name }}) </span>
+      - доступно місць: {{ trip.current_available_places }}
+    </div>
+    <div class="list__detailTrip">
+      <div>Водій: {{ trip.driver.name }} ({{ trip.car_description }})</div>
+      <div>Коментар водія: {{ trip.driver_comments }}</div>
+      <div>Заберу: {{ trip.from_text_description }}</div>
+      <div>Довезу до: {{ trip.to_text_description }}</div>
+    </div>
+    <div class="list__button">
+      <button (click)="changeViewDetail($event)">Детально</button>
+      <button (click)="openReserveDialog(trip)">Зарезервувати</button>
     </div>
   </div>
 </div>
