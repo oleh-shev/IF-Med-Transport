@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Trip, Location, SubLocation, User } from '../../shared/entity.interface';
+import { FutureTrip, Location, SubLocation, User } from '../../shared/entity.interface';
 import { ApiService } from '../../shared/services/api.service';
 import { mergeMap, map, } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -10,8 +10,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./pass-board.component.scss']
 })
 export class PassBoardComponent implements OnInit {
-  futureActiveTrips: Trip[] = [];
-  filteredFutureActiveTrips: Trip[] = [];
+  futureActiveTrips: FutureTrip[] = [];
+  filteredFutureActiveTrips: FutureTrip[] = [];
   passeger: User;
   listLocationTo: SubLocation[] = [];
   listLocationFrom: SubLocation[] =[];
