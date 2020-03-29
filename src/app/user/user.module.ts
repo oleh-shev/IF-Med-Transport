@@ -15,10 +15,14 @@ import {
     MatToolbarModule,
     MatOptionModule,
     MatSelectModule,
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 } from '@angular/material';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { PassBoardComponent } from './pass-board/pass-board.component';
+import { PassBoardComponent } from './pass-board/pass-board.component'
+import { AddTripComponent } from './add-trip/add-trip.component';
 
 const routes: Routes = [
   {
@@ -29,6 +33,9 @@ const routes: Routes = [
   },
   {
     path: 'sign-up', component: SignUpComponent
+  },
+  {
+    path: 'add-trip', component: AddTripComponent
   }
 ];
 
@@ -39,25 +46,29 @@ const routes: Routes = [
     SignUpComponent,
     HomeComponent,
     ToolbarComponent,
-    PassBoardComponent],
+    PassBoardComponent,
+    AddTripComponent,
+  ],
   exports: [
     UserComponent
   ],
     imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        MatToolbarModule,
-        MatListModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatIconModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatOptionModule,
-        MatSelectModule,
+      CommonModule,
+      RouterModule.forChild(routes),
+      MatToolbarModule,
+      MatListModule,
+      MatButtonModule,
+      MatMenuModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatIconModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatCardModule,
+      MatOptionModule,
+      MatSelectModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
     ]
 })
 export class UserModule {
