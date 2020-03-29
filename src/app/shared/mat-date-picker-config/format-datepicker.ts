@@ -1,7 +1,12 @@
 import {NativeDateAdapter} from '@angular/material';
 import {MatDateFormats} from '@angular/material';
+import {Injectable} from '@angular/core';
+import * as moment from 'moment';
 
+
+@Injectable()
 export class AppDateAdapter extends NativeDateAdapter {
+
   // tslint:disable-next-line:ban-types
   format(date: Date, displayFormat: Object): string {
     if (displayFormat === 'input') {
@@ -13,6 +18,10 @@ export class AppDateAdapter extends NativeDateAdapter {
       return `${day}.${month}.${year}`;
     }
     return date.toDateString();
+  }
+
+  getFirstDayOfWeek(): number {
+    return 1;
   }
 }
 
