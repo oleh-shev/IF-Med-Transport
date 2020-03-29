@@ -1,42 +1,62 @@
 <div class="container">
-    <h1>Мої поїздки</h1>
+  <h1>Мої поїздки</h1>
+  <div class="lists"></div>
+  <h1 class="title">Доступні поїздки</h1>
+  <div class="search-box">
+    <form [formGroup]="searchForm">
+      <mat-form-field class="example-full-width">
+        <mat-label>Звідки</mat-label>
+        <mat-select formControlName="from_location" placeholder="Пункт відправлення">
+          <mat-option *ngFor="let item of listLocationFrom" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          Виберіть пункт відправлення
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Куди</mat-label>
+        <mat-select formControlName="to_location" placeholder="Пунк призначення">
+          <mat-option
+            *ngFor="let item of listLocationTo"
+            [value]="item.id"
+          >
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          Виберіть пункт призначення
+        </mat-error>
+      </mat-form-field>
+    </form>
     <div class="lists">
+      <ul>
+        <li *ngFor="let trip of futureActiveTrips">
+          {{ trip.departure_time | date: "dd.MM - hh:mm" }} -
+          {{ trip.from_location_1.name }}
+          <span *ngIf="trip.from_location_2"
+            >({{ trip.from_location_2.name }})</span
+          >
+          - {{ trip.to_location_1.name }}
+          <span *ngIf="trip.to_location_2"
+            >({{ trip.to_location_2.name }}) - доступно місць:
+            {{ trip.current_available_places }}
+          </span>
 
+          <div class="detailTrip">
+            <div>
+              Водій: {{ trip.driver.name }} ({{ trip.car_description }})
+            </div>
+            <div>Коментар водія: {{ trip.driver_comments }}</div>
+            <div>Заберу: {{ trip.from_text_description }}</div>
+            <div>Довезу до: {{ trip.to_text_description }}</div>
+          </div>
+          <button (click)="changeViewDetail($event)">Детально</button>
+          <button>Зарезервувати</button>
+          <button>Відмінити</button>
+        </li>
+      </ul>
     </div>
-    <h1 class="title">Список доступних поїздок</h1>
-    <div class="lists">
-        <!-- <ul *ngFor="let trip of futureActiveTrips">
-            <li>Стан: {{trip.state}}</li> 
-            <li>Час відправлення: {{trip.departure_time | date:"dd.MM - hh:mm"}}</li>
-            <li>Водій: {{trip.driver.name}}</li>
-            <li>Опис транспортного засобу: {{trip.car_description}}</li>
-            <li>Коментар водія: {{trip.driver_comments}}</li>
-            <li>Доступно місць: {{trip.current_available_places}}</li>
-            <li>Звідки: {{trip.from_location_1.name}}</li>
-            <li *ngIf="trip.from_location_2">Звідки: {{trip.from_location_2.name}}</li>
-            <li>Уточнення по місцю посадки: {{trip.from_text_description}} </li>
-            <li>Куди : {{trip.to_location_1.name}}</li>
-            <li *ngIf="trip.to_location_2">Куди: {{trip.to_location_2.name}}</li>
-            <li>Уточнення по місцю висадки: {{trip.to_text_description}} </li>
-        </ul> -->
-        <ul>
-            <li *ngFor="let trip of futureActiveTrips">
-                {{trip.departure_time | date:"dd.MM - hh:mm"}} - 
-                {{trip.from_location_1.name}} <span *ngIf="trip.from_location_2">({{trip.from_location_2.name}})</span>
-                - {{trip.to_location_1.name}} <span *ngIf="trip.to_location_2">({{trip.to_location_2.name}}) - 
-                доступно місць: {{trip.current_available_places}}
-                </span>
-
-                <div class="detailTrip">
-                    <div>Водій: {{trip.driver.name}} ({{trip.car_description}})</div>
-                    <div>Коментар водія: {{trip.driver_comments}}</div>
-                    <div>Заберу: {{trip.from_text_description}}</div>
-                    <div>Довезу до: {{trip.to_text_description}}</div>
-                </div>
-                <button (click)="changeViewDetail($event)">Детально</button>
-                <button>Зарезервувати</button>
-                <button>Відмінити</button>
-         </li>
-        </ul>
-    </div>
+  </div>
 </div>

@@ -12,7 +12,9 @@ import {
     MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatOptionModule,
+    MatSelectModule,
 } from '@angular/material';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -54,6 +56,8 @@ const routes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         MatCardModule,
+        MatOptionModule,
+        MatSelectModule,
     ]
 })
 export class UserModule {

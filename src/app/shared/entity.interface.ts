@@ -25,11 +25,11 @@ export interface Trip {
   available_places: number;
   current_available_places: number;
   current_user_has_reservation: boolean;
-  from_location_1: number;
-  from_location_2: number;
+  from_location_1: SubLocation;
+  from_location_2: SubLocation;
   from_text_description: string;
-  to_location_1: number;
-  to_location_2: number;
+  to_location_1: SubLocation;
+  to_location_2: SubLocation;
   to_text_description: string;
   reserve_places_url?: string;
   cancel_url?: string;
