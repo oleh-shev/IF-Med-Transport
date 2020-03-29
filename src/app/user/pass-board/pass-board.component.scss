@@ -27,10 +27,6 @@ mat-form-field {
     display: none;
     margin: 0.5em 3em;
 }
-
-.visable {
-    display: block;
-}
 .list__button > button {
     width: 110px;
     height: 25px;
@@ -41,4 +37,10 @@ mat-form-field {
     padding: 0 0.2em;
     border: 1px solid black;
     border-radius: 5px;
+}
+.visable {
+    display: block;
+}
+.hidden {
+    display: none;
 }

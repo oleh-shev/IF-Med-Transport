@@ -31,4 +31,8 @@ export class ApiService {
     return this.http.post(`${this.apiURI}trips/${id}/reserve_places/`, payload)
   }
 
+  cancelTripByPassenger(id: string, payload): Observable<any> {
+    return this.http.post(`${this.apiURI}trips/reservations/${id}/cancel_by_passenger/`, payload);
+  }
+
 }

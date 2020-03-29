@@ -1,7 +1,10 @@
 <div class="container">
   <h1>Мої поїздки</h1>
-  <div class="list" *ngFor="let userTrip of userReservationTrips">
-    <div class="list__state">{{ userTrip.state }}</div>
+  <div class="filter-box">
+
+  </div>
+  <div class="list" *ngFor="let userTrip of filteredUserReservationTrips">
+    <div class="list__state">{{ userTrip.state | tripState }}</div>
     <div class="list__info">
       {{ userTrip.trip.departure_time | date: "dd.MM - hh:mm" }} -
       {{ userTrip.trip.from_location_1.name }}
@@ -24,8 +27,11 @@
       <div>Довезу до: {{ userTrip.trip.to_text_description }}</div>
     </div>
     <div class="list__button">
-      <button (click)="changeViewDetail($event)">Детально</button>
-      <button>Відмовитися</button>
+      <button (click)="changeViewDetailTrip($event)">Детально</button>
+      <button 
+        (click)="cancelTripByPassenger(userTrip.id)"
+        [ngClass]="{hidden: userTrip.state == 'Canceled By Passenger'}"
+        >Відмовитися</button>
     </div>
   </div>
 
@@ -33,33 +39,46 @@
   <div class="search-box">
     <form [formGroup]="searchForm">
       <mat-form-field class="example-full-width">
-        <mat-label>Звідки</mat-label>
+        <mat-label>Звідки(місто)</mat-label>
         <mat-select
           formControlName="from_location"
-          placeholder="Пункт відправлення"
         >
           <mat-option *ngFor="let item of listLocationFrom" [value]="item.id">
             {{ item.name }}
           </mat-option>
         </mat-select>
-        <mat-error>
-          Виберіть пункт відправлення
-        </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <mat-label>Куди</mat-label>
+        <mat-label>Звідки(район)</mat-label>
+        <mat-select
+          formControlName="from_sublocation"
+        >
+          <mat-option *ngFor="let item of listSubLocationFrom" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Куди(місто)</mat-label>
         <mat-select
           formControlName="to_location"
-          placeholder="Пунк призначення"
         >
           <mat-option *ngFor="let item of listLocationTo" [value]="item.id">
             {{ item.name }}
           </mat-option>
         </mat-select>
-        <mat-error>
-          Виберіть пункт призначення
-        </mat-error>
       </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Куди(район)</mat-label>
+        <mat-select
+          formControlName="to_sublocation"
+        >
+          <mat-option *ngFor="let item of listSubLocationTo" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button (click)="showAllTrips()">Показати всі</button>
     </form>
   </div>
   <div class="list" *ngFor="let trip of futureActiveTrips">
