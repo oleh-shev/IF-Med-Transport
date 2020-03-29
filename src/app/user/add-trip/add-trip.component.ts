@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, LOCALE_ID, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material';
-import {AppDateAdapter, APP_DATE_FORMATS} from '../../shared/mat-date-picker-config/form-datepicker';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepickerIntl} from '@angular/material';
+import {AppDateAdapter, APP_DATE_FORMATS} from '../../shared/mat-date-picker-config/format-datepicker';
 import {Router} from '@angular/router';
 import {Trip} from '../../shared/entity.interface';
+import * as moment from 'moment';
 
 
 @Component({
@@ -13,7 +14,8 @@ import {Trip} from '../../shared/entity.interface';
   styleUrls: ['./add-trip.component.scss'],
   providers: [
     {provide: DateAdapter, useClass: AppDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS},
+    {provide: MAT_DATE_LOCALE, useValue: moment.locale('uk')}
   ]
 })
 export class AddTripComponent implements OnInit {

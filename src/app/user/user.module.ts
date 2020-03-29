@@ -9,12 +9,12 @@ import {
   MatButtonModule, MatCardModule, MatFormFieldModule,
   MatIconModule, MatInputModule, MatListModule,
   MatMenuModule, MatToolbarModule, MatOptionModule,
-  MatSelectModule, MatTooltipModule, MatDatepickerModule,
+  MatSelectModule, MatDatepickerModule,
   MatNativeDateModule,
 } from '@angular/material';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { PassBoardComponent } from './pass-board/pass-board.component'
+import { PassBoardComponent } from './pass-board/pass-board.component';
 import { AddTripComponent } from './add-trip/add-trip.component';
 import { PassBoardReserveComponent } from './pass-board/pass-board-reserve/pass-board-reserve.component';
 import { PassBoardService } from './pass-board/pass-board.service';
