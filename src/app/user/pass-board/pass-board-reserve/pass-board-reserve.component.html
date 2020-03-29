@@ -1,0 +1,42 @@
+<h1>Резервування поїздки</h1>
+<form [formGroup]="reservePlaceForm" (ngSubmit)="onSubmit(data.id)">
+  <mat-form-field class="example-full-width">
+    <mat-label>Кількість місць</mat-label>
+    <mat-select
+      formControlName="places_number"
+      placeholder="Виберіть кількість місць"
+    >
+      <mat-option *ngFor="let item of convertToArray(data.current_available_places)" [value]="[item]">
+        {{ item }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      Виберіть кількість місць
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width"> 
+    <mat-label>Комментар</mat-label>
+    <input matInput
+      formControlName="passenger_comments"
+      placeholder="Додайте коментар"
+    >
+  </mat-form-field>
+
+  <button
+    mat-stroked-button
+    color="primary"
+    type="submit"
+    [disabled]="reservePlaceForm.invalid"
+  >
+    Зарезервувати
+  </button>
+  <button
+    mat-stroked-button
+    color="primary"
+    type="button"
+    cdkFocusInitial
+    (click)="onDismiss()"
+  >
+    Відмінити
+  </button>
+</form>

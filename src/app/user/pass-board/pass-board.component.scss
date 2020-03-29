@@ -1,20 +1,44 @@
+.container {
+    margin: 0 1em;
+}
 h1 {
     font-size: 1.1em;
 }
 mat-form-field {
     padding: 0 0.5em;
 }
-.detailTrip {
+.list {
+    display: flex;
+    margin-bottom: 0.5em;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.list__state {
+    flex-basis: 80px;
+    text-align: center;
+    margin-right: 1em;
+}
+.list__info {
+    justify-self: start;
+    flex: 1 1 auto;
+}
+.list__detailTrip {
     display: none;
-    margin: 1em 3em;
+    margin: 0.5em 3em;
 }
 
 .visable {
     display: block;
 }
-li button {
+.list__button > button {
     width: 110px;
     height: 25px;
     margin-left: 0.5em;
     border-radius: 8px;
+}
+.list__state {
+    padding: 0 0.2em;
+    border: 1px solid black;
+    border-radius: 5px;
 }
