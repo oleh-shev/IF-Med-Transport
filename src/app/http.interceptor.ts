@@ -34,7 +34,6 @@ export class ApiHttpInterceptor implements HttpInterceptor {
           return this.handle401Error(apiReq, next);
         } else if (err instanceof HttpErrorResponse && err.status === 400) {
           this.openSnackBar();
-          console.log(err.error);
           this.isRefreshing = false;
         } else {
           throw error(err);
@@ -53,7 +52,6 @@ export class ApiHttpInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    console.log(this.isRefreshing);
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
