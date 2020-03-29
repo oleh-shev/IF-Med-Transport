@@ -9,17 +9,21 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material-module/material.module';
 import { UserProfileComponent } from './user-profile/user-profile/user-profile.component';
+import { AddTripComponent } from './add-trip/add-trip.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'profile', component: UserProfileComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'sign-up', component: SignUpComponent }
+  { path: 'sign-up', component: SignUpComponent },
+  {
+    path: 'add-trip', component: AddTripComponent
+  }
 ];
 
 @NgModule({
-  declarations: [UserComponent, LoginComponent, SignUpComponent, HomeComponent, ToolbarComponent, UserProfileComponent],
+  declarations: [UserComponent, LoginComponent, SignUpComponent, HomeComponent, ToolbarComponent, UserProfileComponent, AddTripComponent],
   exports: [
     UserComponent
   ],

@@ -1,0 +1,73 @@
+header {
+  text-align: center;
+}
+.container {
+  margin: 0 15% 10% 15%;
+}
+
+
+@media screen and (max-width: 599px) {
+
+  .trip-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+
+  }
+  .trip-form>div>mat-form-field {
+    width: 100%;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  #cancel {
+    margin-top: 5%;
+  }
+
+
+}
+
+
+@media screen and (min-width: 600px) {
+  .departure,
+  .location-from,
+  .location-to,
+  .car {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+  .buttons > button {
+    width: 35%;
+    margin-top: 5%;
+  }
+
+  .comment {
+    display: flex;
+    justify-content: space-around;
+
+    .mat-form-field {
+      width: 90%;
+    }
+  }
+  .mat-form-field {
+    width: 40%;
+  }
+
+  /*::ng-deep .no-sub-loc {
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+  }*/
+}
