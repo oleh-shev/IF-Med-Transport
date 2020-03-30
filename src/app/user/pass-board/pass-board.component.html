@@ -1,0 +1,134 @@
+<div class="container">
+  <h1>Мої поїздки</h1>
+  <div class="filter-box">
+    <button mat-stroked-button
+      color="prime" 
+      (click)="filteringUserReservationTrips(['Pending'])">
+      Непідтверджені
+    </button>
+    <button
+      mat-stroked-button
+      color="prime"
+    (click)="filteringUserReservationTrips(['Accepted'])">Підтверджені</button>
+    <button 
+      mat-stroked-button
+      color="prime"
+      (click)="filteringUserReservationTrips(['Rejected', 'Canceled By Passenger', 'Canceled By Driver', 'Trip Canceled'])">Скасовані</button>
+    <button 
+      mat-stroked-button
+      color="prime"
+      (click)="filteringUserReservationTrips(stateTrip)">Всі</button>
+  </div>
+  <div class="list" *ngFor="let userTrip of filteredUserReservationTrips">
+    <div class="list__state">{{ userTrip.state | reservationState }}</div>
+    <div class="list__info">
+      {{ userTrip.trip.departure_time | date: "dd.MM - hh:mm" }} -
+      {{ userTrip.trip.from_location_1.name }}
+      <span *ngIf="userTrip.trip.from_location_2"
+        >({{ userTrip.trip.from_location_2.name }})</span
+      >
+      - {{ userTrip.trip.to_location_1.name }}
+      <span *ngIf="userTrip.trip.to_location_2"
+        >({{ userTrip.trip.to_location_2.name }})
+      </span>
+    </div>
+    <div class="list__detailTrip">
+      <div>
+        Водій: {{ userTrip.trip.driver.name }} ({{
+          userTrip.trip.car_description
+        }})
+      </div>
+      <div>Коментар водія: {{ userTrip.trip.driver_comments }}</div>
+      <div>Заберу: {{ userTrip.trip.from_text_description }}</div>
+      <div>Довезу до: {{ userTrip.trip.to_text_description }}</div>
+    </div>
+    <div class="list__button">
+      <button 
+        mat-stroked-button
+        color="prime"
+      (click)="changeViewDetailTrip($event)">Детально</button>
+      <button 
+        mat-stroked-button
+        color="prime"
+        (click)="cancelTripByPassenger(userTrip.id)"
+        [ngClass]="{hidden: userTrip.state == 'Canceled By Passenger'}"
+        >Відмовитися</button>
+    </div>
+  </div>
+
+  <h1 class="title">Доступні поїздки</h1>
+  <div class="search-box">
+    <form [formGroup]="searchForm">
+      <mat-form-field class="example-full-width">
+        <mat-label>Звідки(місто)</mat-label>
+        <mat-select
+          formControlName="from_location"
+        >
+          <mat-option *ngFor="let item of listLocationFrom" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Звідки(район)</mat-label>
+        <mat-select
+          formControlName="from_sublocation"
+        >
+          <mat-option *ngFor="let item of listSubLocationFrom" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Куди(місто)</mat-label>
+        <mat-select
+          formControlName="to_location"
+        >
+          <mat-option *ngFor="let item of listLocationTo" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Куди(район)</mat-label>
+        <mat-select
+          formControlName="to_sublocation"
+        >
+          <mat-option *ngFor="let item of listSubLocationTo" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        mat-stroked-button
+        color="prime"
+        (click)="showAllTrips()">Показати всі</button>
+    </form>
+  </div>
+  <div class="list" *ngFor="let trip of filteredFutureActiveTrips">
+    <div class="list__info">
+      {{ trip.departure_time | date: "dd.MM - hh:mm" }} -
+      {{ trip.from_location_1.name }}
+      <span *ngIf="trip.from_location_2">({{ trip.from_location_2.name }})</span>
+      - {{ trip.to_location_1.name }}
+      <span *ngIf="trip.to_location_2">({{ trip.to_location_2.name }}) </span>
+      - доступно місць: {{ trip.current_available_places }}
+    </div>
+    <div class="list__detailTrip">
+      <div>Водій: {{ trip.driver.name }} ({{ trip.car_description }})</div>
+      <div>Коментар водія: {{ trip.driver_comments }}</div>
+      <div>Заберу: {{ trip.from_text_description }}</div>
+      <div>Довезу до: {{ trip.to_text_description }}</div>
+    </div>
+    <div class="list__button">
+      <button 
+        mat-stroked-button
+        color="prime"
+        (click)="changeViewDetailTrip($event)">Детально</button>
+      <button 
+        mat-stroked-button
+        color="prime"
+        (click)="openReserveDialog(trip)">Зарезервувати</button>
+    </div>
+  </div>
+</div>

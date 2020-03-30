@@ -14,7 +14,7 @@ export class ToolbarComponent implements OnInit {
   isLogged: boolean;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
   ) {
   }
 

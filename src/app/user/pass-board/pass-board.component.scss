@@ -1,0 +1,65 @@
+.container {
+    margin: 0 1em;
+}
+h1 {
+    font-size: 1.1em;
+}
+.filter-box {
+    margin-bottom: 1em;
+}
+.list {
+    display: flex;
+    margin-bottom: 0.5em;
+    padding: 0 0.5em;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 35px;
+}
+.list:nth-of-type(2n) {
+    background-color: #ececec;
+}
+.list__state {
+    flex-basis: 80px;
+    text-align: center;
+    margin-right: 1em;
+}
+.list__info {
+    justify-self: start;
+    flex: 1 1 auto;
+}
+.list__detailTrip {
+    display: none;
+    margin: 0.5em 3em;
+}
+.list__button {
+    justify-self: end;
+    margin: 0.2em 0;
+}
+.list__button > button, .filter-box > button, .search-box button{
+    margin-left: 0.5em;
+    border-radius: 4px;
+}
+.list__state {
+    padding: 0 0.2em;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.visable {
+    display: block;
+}
+.hidden {
+    display: none;
+}
+button:focus {
+    background-color: blue;
+}
+.search-box {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 1em;
+}
+mat-form-field {
+    padding: 0 0.5em;
+    flex: 1 1 auto;
+}

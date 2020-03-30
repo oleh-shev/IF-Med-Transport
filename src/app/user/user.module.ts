@@ -1,15 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UserComponent } from './user.component';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../shared/material-module/material.module';
-import { UserProfileComponent } from './user-profile/user-profile/user-profile.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {UserComponent} from './user.component';
+import {LoginComponent} from './login/login.component';
+import {SignUpComponent} from './sign-up/sign-up.component';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
+import {ToolbarComponent} from './toolbar/toolbar.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { PassBoardComponent } from './pass-board/pass-board.component';
 import { AddTripComponent } from './add-trip/add-trip.component';
+import { PassBoardReserveComponent } from './pass-board/pass-board-reserve/pass-board-reserve.component';
+import { PassBoardService } from './pass-board/pass-board.service';
+import { TripStatePipe } from '../shared/pipes/trip-state.pipe';
+import { DriverBoardComponent } from './driver-board/driver-board.component';
+import { ReservationStatePipe } from '../shared/pipes/reservation-state.pipe';
+import { UserProfileComponent } from './user-profile/user-profile/user-profile.component';
+import { MaterialModule } from '../shared/material-module/material.module';
+
 
 
 const routes: Routes = [
@@ -19,13 +26,35 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   {
     path: 'add-trip', component: AddTripComponent
+  },
+  {
+    path: 'pass-board', component: PassBoardComponent
+  },
+  {
+    path: 'driver-board', component: DriverBoardComponent
   }
 ];
 
 @NgModule({
-  declarations: [UserComponent, LoginComponent, SignUpComponent, HomeComponent, ToolbarComponent, UserProfileComponent, AddTripComponent],
+  declarations: [
+    UserComponent,
+    LoginComponent,
+    SignUpComponent,
+    HomeComponent,
+    ToolbarComponent,
+    PassBoardComponent,
+    UserProfileComponent,
+    AddTripComponent,
+    PassBoardReserveComponent,
+    TripStatePipe,
+    DriverBoardComponent,
+    ReservationStatePipe,
+  ],
   exports: [
     UserComponent
+  ],
+  providers: [
+    PassBoardService,
   ],
   imports: [
     CommonModule,
@@ -34,7 +63,9 @@ const routes: Routes = [
     ReactiveFormsModule,
     MaterialModule
   ],
-  providers: []
+  entryComponents: [
+    PassBoardReserveComponent,
+  ]
 })
 export class UserModule {
 }
