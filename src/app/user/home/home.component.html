@@ -1,1 +1,76 @@
-<p>home works!</p>
+<!--HEADER-->
+<div class="header">
+  <img [src]="logo">
+  <h1 class="mat-display-1">IF Med Transport</h1><mat-icon></mat-icon>
+</div>
+
+<!--ROUTES-->
+
+<div class="navigation">
+  <button mat-button color="primary" [routerLink]="['../pass-board']">Сторінка Пасажира</button>
+  <button mat-button color="primary" [routerLink]="['../driver-board']">Сторінка Водія</button>
+</div>
+
+<!--ABOUT-->
+<div class="service-container">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Про Сервіс</mat-panel-title>
+      </mat-expansion-panel-header>
+      <h3>Допомога у Транспортуванні Медичних Працівників</h3>
+      <p class="service-desc">
+        Цей сервіс створено для координації медичних працівників, що стикнулися з проблемою добирання до робочих місць
+        та домівок і небайдужих водіїв котрі готові допомогти в ситуації що склалася
+      </p>
+      <p>
+        На цьому стайті ви можете добавити поїздку (<i>для водіїв</i>) або подати заявку на поїздку (<i>для мед працівників</i>)
+      </p>
+      <p><b><i>
+        Для того щоб залишити заявку або добавити поїздку на сайті необхідно авторизуватися
+      </i></b></p>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!--HOW TO USE-->
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>Як користуатися?</mat-expansion-panel-header>
+      <div>
+        <h3>Авторизація</h3>
+        <p>
+          У правому верхньому куті екрану натиснувши на кнопку <b><i>Авторизація</i></b> ви можете обрати
+          <b><i>Зареєструватися</i></b>, для реєстрації на сайті або <b><i>Увійти</i></b> якщо ви вже зареєстровані.
+        </p>
+        <p>
+          Після Авторизації в тому ж верхньому правому куті ви можете перейти на сторінку <b><i>Мій Профіль</i></b> або
+          <b><i>Вийти</i></b>
+        </p>
+      </div>
+      <div>
+        <h3>Сторінка Пасажира</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur deserunt dignissimos dolorum eos, fugiat
+          id in ipsum iure laboriosam magni mollitia nam nostrum perspiciatis placeat quae, quaerat repellendus tempora
+          temporibus.
+        </p>
+      </div>
+      <div>
+        <h3>Сторінка Водія</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur deserunt dignissimos dolorum eos, fugiat
+          id in ipsum iure laboriosam magni mollitia nam nostrum perspiciatis placeat quae, quaerat repellendus tempora
+          temporibus.
+        </p>
+        <p>
+          Щоб <b><i>Створити Поїздку</i></b> натисніть на відповідну кнопку вгорі та заповніть форму
+        </p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<!--Чат для координації добровольців, які готові допомогти у ситуації, що склалась.
+
+Зараз гостро стоїть питання про транспорт для медиків яким люди зможуть доїхати до роботи.
+
+Медики зараз працюють в надважких умовах.-->
