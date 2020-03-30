@@ -35,4 +35,31 @@ export class ApiService {
     return this.http.post(`${this.apiURI}trips/reservations/${id}/cancel_by_passenger/`, payload);
   }
 
+  getUserTrips(): Observable<any> {
+    return this.http.get(`${this.apiURI}trips/user_trips/`);
+  }
+
+  getTripById(id: string): Observable<any> {
+    return this.http.get(`${this.apiURI}trips/${id}/`);
+  }
+  acceptTrip(id: string, payload): Observable<any> {
+    return this.http.post(`${this.apiURI}trips/reservations/${id}/accept/`, payload);
+  }
+  
+  rejectTrip(id: string, payload): Observable<any> {
+    return this.http.post(`${this.apiURI}trips/reservations/${id}/reject/`, payload);
+  }
+  
+  cancelTripByDriver(id: string, payload): Observable<any> {
+    return this.http.post(`${this.apiURI}trips/reservations/${id}/cancel_by_driver/`, payload);
+  }
+
+  cancelTrip(id: string, payload): Observable<any> {
+    return this.http.post(`${this.apiURI}trips/${id}/cancel/`, payload);
+  }
+
+  completeTrip(id: string, payload): Observable<any> {
+    return this.http.post(`${this.apiURI}trips/${id}/complete/`, payload);
+  }
+
 }
