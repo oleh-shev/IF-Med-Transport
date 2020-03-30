@@ -4,15 +4,20 @@
 h1 {
     font-size: 1.1em;
 }
-mat-form-field {
-    padding: 0 0.5em;
+.filter-box {
+    margin-bottom: 1em;
 }
 .list {
     display: flex;
     margin-bottom: 0.5em;
+    padding: 0 0.5em;
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
+    min-height: 35px;
+}
+.list:nth-of-type(2n) {
+    background-color: #ececec;
 }
 .list__state {
     flex-basis: 80px;
@@ -27,11 +32,13 @@ mat-form-field {
     display: none;
     margin: 0.5em 3em;
 }
-.list__button > button {
-    width: 110px;
-    height: 25px;
+.list__button {
+    justify-self: end;
+    margin: 0.2em 0;
+}
+.list__button > button, .filter-box > button, .search-box button{
     margin-left: 0.5em;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 .list__state {
     padding: 0 0.2em;
@@ -43,4 +50,16 @@ mat-form-field {
 }
 .hidden {
     display: none;
+}
+button:focus {
+    background-color: blue;
+}
+.search-box {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 1em;
+}
+mat-form-field {
+    padding: 0 0.5em;
+    flex: 1 1 auto;
 }

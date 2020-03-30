@@ -56,13 +56,18 @@ export class PassBoardComponent implements OnInit {
         this.futureActiveTrips = res.results.filter( item => !item.current_user_has_reservation);
         console.log(this.futureActiveTrips);
         this.filteredFutureActiveTrips =  this.futureActiveTrips;
-        this.listLocationFrom = this.getLocations(this.filteredFutureActiveTrips, 'from_location_1');
-        this.listLocationTo = this.getLocations(this.filteredFutureActiveTrips, 'to_location_1');
-        this.listSubLocationFrom = this.getLocations(this.filteredFutureActiveTrips, 'from_location_2');
-        this.listSubLocationTo = this.getLocations(this.filteredFutureActiveTrips, 'to_location_2');
+        this.setLocations();
     }, (err: any) => {
       this.openSnackBar(err.messages.message);
     });
+  }
+
+  /** set all location properties */
+  private setLocations () {
+    this.listLocationFrom = this.getLocations(this.filteredFutureActiveTrips, 'from_location_1');
+    this.listLocationTo = this.getLocations(this.filteredFutureActiveTrips, 'to_location_1');
+    this.listSubLocationFrom = this.getLocations(this.filteredFutureActiveTrips, 'from_location_2');
+    this.listSubLocationTo = this.getLocations(this.filteredFutureActiveTrips, 'to_location_2');
   }
 
   private getInfoAboutMe() {
@@ -107,28 +112,29 @@ export class PassBoardComponent implements OnInit {
     }
   }
 
-    /** handler for change field filterForm "type" */
+    /** handler for change fields searchForm */
     private onChangeFieldsSearchForm() {
       this.searchForm.valueChanges.subscribe(value => {
         if (value.from_location) {
-          this.futureActiveTrips = this.futureActiveTrips
+          this.filteredFutureActiveTrips = this.filteredFutureActiveTrips
             .filter(item => item.from_location_1.id == value.from_location);
         }
         if (value.from_sublocation) {
-          this.futureActiveTrips = this.futureActiveTrips
+          this.filteredFutureActiveTrips = this.filteredFutureActiveTrips
             .filter(item => item.from_location_2.id == value.from_location);
         }
         if (value.to_location) {
-          this.futureActiveTrips = this.futureActiveTrips
+          this.filteredFutureActiveTrips = this.filteredFutureActiveTrips
           .filter(item => item.to_location_1.id == value.to_location);
         }
         if (value.to_sublocation) {
-          this.futureActiveTrips = this.futureActiveTrips
+          this.filteredFutureActiveTrips = this.filteredFutureActiveTrips
           .filter(item => item.to_location_2.id == value.to_sublocation);
         }
+        this.setLocations();
       });
     }
-
+    /** get location and sublocation from list trips */
     getLocations(listTrips: FutureTrip[], location: string): SubLocation[] {
       const locations = new Map();
       listTrips.map(item => item[location]).forEach(item => {
@@ -142,7 +148,7 @@ export class PassBoardComponent implements OnInit {
     showAllTrips() {
       this.getFutureActiveTripsWithLocations();
       this.searchForm.reset();
-    }
+     }
 
     /** Reserved places */
   openReserveDialog(trip: FutureTrip): void {
@@ -169,8 +175,9 @@ export class PassBoardComponent implements OnInit {
   }
 
   filteringUserReservationTrips(condition: String[]) {
+    console.log(condition);
     this.filteredUserReservationTrips = this.userReservationTrips.filter( item => {
-      condition.includes(item.state);
+      return condition.includes(item.state);
     });
   }
 

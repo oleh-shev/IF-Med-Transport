@@ -1,7 +1,23 @@
 <div class="container">
   <h1>Мої поїздки</h1>
   <div class="filter-box">
-
+    <button mat-stroked-button
+      color="prime" 
+      (click)="filteringUserReservationTrips(['Pending'])">
+      Непідтверджені
+    </button>
+    <button
+      mat-stroked-button
+      color="prime"
+    (click)="filteringUserReservationTrips(['Accepted'])">Підтверджені</button>
+    <button 
+      mat-stroked-button
+      color="prime"
+      (click)="filteringUserReservationTrips(['Rejected', 'Canceled By Passenger', 'Canceled By Driver', 'Trip Canceled'])">Скасовані</button>
+    <button 
+      mat-stroked-button
+      color="prime"
+      (click)="filteringUserReservationTrips(stateTrip)">Всі</button>
   </div>
   <div class="list" *ngFor="let userTrip of filteredUserReservationTrips">
     <div class="list__state">{{ userTrip.state | tripState }}</div>
@@ -27,8 +43,13 @@
       <div>Довезу до: {{ userTrip.trip.to_text_description }}</div>
     </div>
     <div class="list__button">
-      <button (click)="changeViewDetailTrip($event)">Детально</button>
       <button 
+        mat-stroked-button
+        color="prime"
+      (click)="changeViewDetailTrip($event)">Детально</button>
+      <button 
+        mat-stroked-button
+        color="prime"
         (click)="cancelTripByPassenger(userTrip.id)"
         [ngClass]="{hidden: userTrip.state == 'Canceled By Passenger'}"
         >Відмовитися</button>
@@ -78,10 +99,13 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button (click)="showAllTrips()">Показати всі</button>
+      <button
+        mat-stroked-button
+        color="prime"
+        (click)="showAllTrips()">Показати всі</button>
     </form>
   </div>
-  <div class="list" *ngFor="let trip of futureActiveTrips">
+  <div class="list" *ngFor="let trip of filteredFutureActiveTrips">
     <div class="list__info">
       {{ trip.departure_time | date: "dd.MM - hh:mm" }} -
       {{ trip.from_location_1.name }}
@@ -97,8 +121,14 @@
       <div>Довезу до: {{ trip.to_text_description }}</div>
     </div>
     <div class="list__button">
-      <button (click)="changeViewDetail($event)">Детально</button>
-      <button (click)="openReserveDialog(trip)">Зарезервувати</button>
+      <button 
+        mat-stroked-button
+        color="prime"
+        (click)="changeViewDetailTrip($event)">Детально</button>
+      <button 
+        mat-stroked-button
+        color="prime"
+        (click)="openReserveDialog(trip)">Зарезервувати</button>
     </div>
   </div>
 </div>
