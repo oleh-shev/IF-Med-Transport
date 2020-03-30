@@ -36,7 +36,7 @@ export class ApiHttpInterceptor implements HttpInterceptor {
           this.openSnackBar();
           this.isRefreshing = false;
         } else {
-          throw error(err);
+          throw err;
         }
       })
     );

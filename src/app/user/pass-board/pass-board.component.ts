@@ -90,13 +90,6 @@ export class PassBoardComponent implements OnInit {
       });
   }
 
-  // private getLocations() {
-  //   this.apiservice.getLocations()
-  //   .subscribe(res => {
-  //     this.listLocations = res.results;
-  //   });
-  // }
-
   changeViewDetailTrip(event) {
     let target = event.target;
     let outerBox: HTMLElement = target.closest('.list');
@@ -162,7 +155,7 @@ export class PassBoardComponent implements OnInit {
       this.getUserReservations();
       this.futureActiveTrips.filter( item => item.id === res.trip);
       }, (err: any) => {
-        this.openSnackBar(err.messages.message);
+        this.openSnackBar(err.detail);
       });
   }
   cancelTripByPassenger(id: string) {
@@ -170,7 +163,7 @@ export class PassBoardComponent implements OnInit {
       this.getUserReservations();
       this.getFutureActiveTripsWithLocations();
     }, (err: any) => {
-      this.openSnackBar(err.messages.message);
+      this.openSnackBar(err.detail);
     });
   }
 
