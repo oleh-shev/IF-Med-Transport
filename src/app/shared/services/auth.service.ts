@@ -40,6 +40,11 @@ export class AuthService {
     return this.isLogged;
   }
 
+  isTokenAvailable() {
+    const token = this.accessToken;
+    return  token !== null;
+  }
+
   logOut() {
     return this.http.post('auth/jwt/blacklist/', {
       refresh: this.refreshToken

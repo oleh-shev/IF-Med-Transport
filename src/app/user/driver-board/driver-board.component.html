@@ -1,3 +1,4 @@
+<button [routerLink]="['../add-trip']">Додати Поїздку</button>
 <div class="container">
   <h1>Мої поїздки</h1>
   <div class="list" *ngFor="let driverTrip of driverTrips">
@@ -15,7 +16,7 @@
     </div>
     <div class="list__detailTrip">
       {{ driverTrip.driver_comments }},
-      можу забрати: {{ driverTrip.from_text_description }}, 
+      можу забрати: {{ driverTrip.from_text_description }},
       можу довезти: {{ driverTrip.to_text_description }}
     </div>
     <div class="list__button">

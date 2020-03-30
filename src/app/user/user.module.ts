@@ -6,11 +6,11 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {
-  MatButtonModule, MatCardModule, MatFormFieldModule,
-  MatIconModule, MatInputModule, MatListModule,
-  MatMenuModule, MatToolbarModule, MatOptionModule,
-  MatSelectModule, MatDatepickerModule,
-  MatNativeDateModule,
+    MatButtonModule, MatCardModule, MatFormFieldModule,
+    MatIconModule, MatInputModule, MatListModule,
+    MatMenuModule, MatToolbarModule, MatOptionModule,
+    MatSelectModule, MatDatepickerModule,
+    MatNativeDateModule, MatExpansionModule,
 } from '@angular/material';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -66,24 +66,25 @@ const routes: Routes = [
   providers: [
     PassBoardService,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatToolbarModule,
-    MatListModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatToolbarModule,
+        MatListModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatExpansionModule,
+    ],
   entryComponents: [
     PassBoardReserveComponent,
     DriverBoardConfirmComponent,
