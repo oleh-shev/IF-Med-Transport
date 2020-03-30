@@ -18,6 +18,8 @@ import { PassBoardComponent } from './pass-board/pass-board.component';
 import { AddTripComponent } from './add-trip/add-trip.component';
 import { PassBoardReserveComponent } from './pass-board/pass-board-reserve/pass-board-reserve.component';
 import { PassBoardService } from './pass-board/pass-board.service';
+import { TripStatePipe } from '../shared/pipes/trip-state.pipe';
+
 
 const routes: Routes = [
   {
@@ -44,6 +46,7 @@ const routes: Routes = [
     PassBoardComponent,
     AddTripComponent,
     PassBoardReserveComponent,
+    TripStatePipe,
   ],
   exports: [
     UserComponent
