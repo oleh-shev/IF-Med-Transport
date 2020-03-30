@@ -20,7 +20,7 @@
       (click)="filteringUserReservationTrips(stateTrip)">Всі</button>
   </div>
   <div class="list" *ngFor="let userTrip of filteredUserReservationTrips">
-    <div class="list__state">{{ userTrip.state | tripState }}</div>
+    <div class="list__state">{{ userTrip.state | reservationState }}</div>
     <div class="list__info">
       {{ userTrip.trip.departure_time | date: "dd.MM - hh:mm" }} -
       {{ userTrip.trip.from_location_1.name }}

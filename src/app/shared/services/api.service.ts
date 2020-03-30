@@ -35,4 +35,11 @@ export class ApiService {
     return this.http.post(`${this.apiURI}trips/reservations/${id}/cancel_by_passenger/`, payload);
   }
 
+  getUserTrips(): Observable<any> {
+    return this.http.get(`${this.apiURI}trips/user_trips/`);
+  }
+
+  getTripById(id: string): Observable<any> {
+    return this.http.get(`${this.apiURI}trips/${id}/`);
+  }
 }

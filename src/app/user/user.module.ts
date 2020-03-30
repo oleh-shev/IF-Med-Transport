@@ -19,6 +19,8 @@ import { AddTripComponent } from './add-trip/add-trip.component';
 import { PassBoardReserveComponent } from './pass-board/pass-board-reserve/pass-board-reserve.component';
 import { PassBoardService } from './pass-board/pass-board.service';
 import { TripStatePipe } from '../shared/pipes/trip-state.pipe';
+import { DriverBoardComponent } from './driver-board/driver-board.component';
+import { ReservationStatePipe } from '../shared/pipes/reservation-state.pipe';
 
 
 const routes: Routes = [
@@ -33,6 +35,12 @@ const routes: Routes = [
   },
   {
     path: 'add-trip', component: AddTripComponent
+  },
+  {
+    path: 'pass-board', component: PassBoardComponent
+  },
+  {
+    path: 'driver-board', component: DriverBoardComponent
   }
 ];
 
@@ -47,6 +55,8 @@ const routes: Routes = [
     AddTripComponent,
     PassBoardReserveComponent,
     TripStatePipe,
+    DriverBoardComponent,
+    ReservationStatePipe,
   ],
   exports: [
     UserComponent
