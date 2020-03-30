@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {map, switchMap, tap} from 'rxjs/operators';
 import {Tokens, User} from '../entity.interface';
 import * as jwt_decode from 'jwt-decode';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
 export class AuthService {
   private isLogged = new EventEmitter();
   private userId: string;
-  public currentUser = new Subject<User>();
+  public currentUser = new BehaviorSubject<any>(null);
 
   constructor(
     private http: HttpClient
