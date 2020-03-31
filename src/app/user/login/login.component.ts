@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     const data = this.userData.value;
     data.phone_number = `+380${data.phone_number}`;
     this.authService.logIn(data).subscribe(() => {
-      this.route.navigate(['home']);
+      this.route.navigate(['']);
     }, (err: any) => {
       if (err.error.detail.includes('No active account found with the given credentials')) {
         this.listOfErrors = 'Не знайдено акаунт з такими даними';

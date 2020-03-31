@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../shared/services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../shared/services/auth.service';
+import { switchMap } from 'rxjs/operators';
+import { User } from 'src/app/shared/entity.interface';
 
 @Component({
   selector: 'app-toolbar',
@@ -12,7 +14,7 @@ export class ToolbarComponent implements OnInit {
   isLogged: boolean;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
   ) {
   }
 
@@ -21,8 +23,13 @@ export class ToolbarComponent implements OnInit {
     this.subscription = this.authService.isUserLogged().subscribe(data => {
       this.isLogged = data;
     });
+    if (!this.authService.currentUser.getValue()) {
+      this.authService.getUserInfo()
+      .subscribe((data: User) => {
+        this.authService.currentUser.next(data);
+      });
+    }
   }
-
   logOut() {
     this.authService.logOut().subscribe();
   }

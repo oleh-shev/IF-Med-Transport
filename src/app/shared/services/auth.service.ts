@@ -1,13 +1,18 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, switchMap, tap} from 'rxjs/operators';
-import {Tokens} from '../entity.interface';
+import {Tokens, User} from '../entity.interface';
+import * as jwt_decode from 'jwt-decode';
+import { Subject, BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private isLogged = new EventEmitter();
+  private userId: string;
+  public currentUser = new BehaviorSubject<any>(null);
 
   constructor(
     private http: HttpClient
@@ -40,6 +45,14 @@ export class AuthService {
     return this.isLogged;
   }
 
+  getUserId() {
+    this.userId = jwt_decode(this.accessToken).user_id;
+    return this.userId;
+  }
+
+  getUserInfo() {
+    return this.http.get(`auth/users/${this.getUserId()}/`);
+  }
   isTokenAvailable() {
     const token = this.accessToken;
     return  token !== null;

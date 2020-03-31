@@ -3,3 +3,10 @@ mat-toolbar {
   justify-content: space-between;
 }
 
+.profile-menu-items {
+  display: flex;
+  align-items: center;
+}
+.profile-menu-item-text {
+  display: inline-block;
+}

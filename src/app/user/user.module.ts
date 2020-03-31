@@ -5,13 +5,6 @@ import {LoginComponent} from './login/login.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import {
-    MatButtonModule, MatCardModule, MatFormFieldModule,
-    MatIconModule, MatInputModule, MatListModule,
-    MatMenuModule, MatToolbarModule, MatOptionModule,
-    MatSelectModule, MatDatepickerModule,
-    MatNativeDateModule, MatExpansionModule,
-} from '@angular/material';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PassBoardComponent } from './pass-board/pass-board.component';
@@ -21,19 +14,17 @@ import { PassBoardService } from './pass-board/pass-board.service';
 import { TripStatePipe } from '../shared/pipes/trip-state.pipe';
 import { DriverBoardComponent } from './driver-board/driver-board.component';
 import { ReservationStatePipe } from '../shared/pipes/reservation-state.pipe';
+import { UserProfileComponent } from './user-profile/user-profile/user-profile.component';
+import { MaterialModule } from '../shared/material-module/material.module';
 import { DriverBoardConfirmComponent } from './driver-board/driver-board-confirm/driver-board-confirm.component';
 
 
+
 const routes: Routes = [
-  {
-    path: 'home', component: HomeComponent
-  },
-  {
-    path: 'login', component: LoginComponent
-  },
-  {
-    path: 'sign-up', component: SignUpComponent
-  },
+  { path: '', component: HomeComponent },
+  { path: 'profile', component: UserProfileComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'sign-up', component: SignUpComponent },
   {
     path: 'add-trip', component: AddTripComponent
   },
@@ -53,6 +44,7 @@ const routes: Routes = [
     HomeComponent,
     ToolbarComponent,
     PassBoardComponent,
+    UserProfileComponent,
     AddTripComponent,
     PassBoardReserveComponent,
     TripStatePipe,
@@ -66,25 +58,13 @@ const routes: Routes = [
   providers: [
     PassBoardService,
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        MatToolbarModule,
-        MatListModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatIconModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatExpansionModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule
+  ],
   entryComponents: [
     PassBoardReserveComponent,
     DriverBoardConfirmComponent,
