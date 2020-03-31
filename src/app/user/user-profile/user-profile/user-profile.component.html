@@ -77,7 +77,7 @@
         </mat-error>
     </mat-form-field>
     <div class="form_actions">
-        <button mat-flat-button color="primary" [disabled]= "profileForm.invalid" type="submit">Оновити</button>
+        <button mat-flat-button color="primary" [disabled]= "profileForm.invalid || !profileForm.dirty" type="submit">Оновити</button>
         <button mat-flat-button color="warn" cdkFocusInitial (click)="cancelUpdate()">Відмінити</button>
     </div>
   </form>
