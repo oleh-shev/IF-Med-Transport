@@ -87,7 +87,7 @@ export class DriverBoardComponent implements OnInit {
 
   changeViewDetailTrip(event) {
     let target = event.target;
-    let outerBox: HTMLElement = target.closest('.list');
+    let outerBox: HTMLElement = target.closest('.listbox');
     if (outerBox) {
       let detailBox = outerBox.getElementsByClassName('list__detailTrip').item(0);
       detailBox.classList.toggle('visable');
