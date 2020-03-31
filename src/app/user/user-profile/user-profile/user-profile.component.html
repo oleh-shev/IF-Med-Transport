@@ -1,1 +1,87 @@
-<p>user-profile works!</p>
+ <section class="container">
+    <mat-card class="profile_card">
+        <mat-card-content  class="view__profile">
+            <div class="view__profile_container">
+                <div class="profile_photo">
+                     <img class="photo" alt="Фото профілю" [src]="img">
+                </div>
+                <ng-container *ngIf="!isUpdate;else updForm">
+                    <div class="profile_information">
+                        <div class="profile_information_content">
+                            <h1>{{
+                                concatName( 
+                                (authService.currentUser | async)?.first_name,
+                                (authService.currentUser | async)?.last_name)
+                            }}</h1>
+                            <h4 class="s_description">{{(authService.currentUser | async)?.description}}</h4>
+                        </div>
+                        <div class="profile_information_content">
+                            <div class="s_title">Телефон</div>
+                            <div class="s_description">{{(authService.currentUser | async)?.phone_number}}</div>
+                        </div>
+                        
+                        <div class="profile_information_content">
+                            <div class="s_title">Пошта</div>
+                            <div  class="s_description">{{(authService.currentUser | async)?.email}}</div>
+                        </div>
+                    </div>
+                </ng-container>
+                
+             
+            </div>
+        </mat-card-content>
+        <mat-card-actions class="actions">
+            <button *ngIf="!isUpdate" mat-flat-button color="primary" (click)="onUpdate()">Редагувати</button>
+          </mat-card-actions>
+    </mat-card>
+    
+</section>
+
+<ng-template #updForm>
+    <form [formGroup]="profileForm" class="form-control"
+(ngSubmit)="onSubmit()">
+  
+    <mat-form-field appearance="outline">
+        <mat-label>Імя</mat-label>
+        <input matInput formControlName="first_name" placeholder="Введіть імя"/>
+        <button type="button"  *ngIf="first_name.value" (click)="first_name.reset()" mat-button matSuffix mat-icon-button aria-label="Clear"> <mat-icon>close</mat-icon></button>
+        <mat-error *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+            {{ getErrorMessage(first_name) }}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Прізвище</mat-label>
+        <input matInput formControlName="last_name" placeholder="Введіть прізвище"/>
+        <button type="button" *ngIf="last_name.value" (click)="last_name.reset()"  mat-button matSuffix mat-icon-button aria-label="Clear"> <mat-icon>close</mat-icon></button>
+        <mat-error *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+            {{ getErrorMessage(last_name) }}
+        </mat-error>
+    </mat-form-field>
+
+     <mat-form-field appearance="outline">
+        <mat-label>Пошта</mat-label>
+        <input matInput formControlName="email" placeholder="Введіть пошту"/>
+        <button type="button" *ngIf="email.value" (click)="email.reset()" mat-button matSuffix mat-icon-button aria-label="Clear"> <mat-icon>close</mat-icon></button>
+        <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+            {{ getErrorMessage(email) }}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Опис</mat-label>
+        <input matInput formControlName="description" placeholder="Введіть опис"/>
+        <button type="button" *ngIf="description.value" (click)="description.reset()" mat-button matSuffix mat-icon-button aria-label="Clear"> <mat-icon>close</mat-icon></button>
+        <mat-error *ngIf="description.invalid && (description.dirty || description.touched)">
+            {{ getErrorMessage(description) }}
+        </mat-error>
+    </mat-form-field>
+    <div class="form_actions">
+        <button mat-flat-button color="primary" [disabled]= "profileForm.invalid || !profileForm.dirty" type="submit">Оновити</button>
+        <button mat-flat-button color="warn" cdkFocusInitial (click)="cancelUpdate()">Відмінити</button>
+    </div>
+  </form>
+</ng-template>
+
+    
+

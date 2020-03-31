@@ -23,9 +23,10 @@ export class ToolbarComponent implements OnInit {
     this.subscription = this.authService.isUserLogged().subscribe(data => {
       this.isLogged = data;
     });
-    if (!this.authService.currentUser.getValue()) {
+    if (this.authService.isTokenAvailable()) {
       this.authService.getUserInfo()
       .subscribe((data: User) => {
+        console.log('How many times');
         this.authService.currentUser.next(data);
       });
     }
