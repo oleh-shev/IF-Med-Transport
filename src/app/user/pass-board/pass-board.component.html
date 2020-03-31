@@ -34,14 +34,20 @@
         </span>
       </div>
       <div class="list__detailTrip">
-        <div>
-          Водій: {{ userTrip.trip.driver.name }} ({{
-            userTrip.trip.car_description
-          }})
-        </div>
-        <div>Коментар водія: {{ userTrip.trip.driver_comments }} {{userTrip.driver_comments}} </div>
-        <div>Заберу: {{ userTrip.trip.from_text_description }}</div>
-        <div>Довезу до: {{ userTrip.trip.to_text_description }}</div>
+          Водій: {{ userTrip.trip.driver.name }} {{ userTrip.trip.driver.phone_number }} 
+          ({{ userTrip.trip.car_description }})
+        <span *ngIf="userTrip.trip.driver_comments.length > 0">
+          Коментар водія: {{ userTrip.trip.driver_comments }},
+        </span>
+        <span *ngIf="userTrip.trip.from_text_description.length > 0"> 
+          можу забрати: {{ userTrip.trip.from_text_description }},
+        </span>
+        <span *ngIf="userTrip.trip.to_text_description.length > 0">
+          можу довезу до: {{ userTrip.trip.to_text_description }}
+        </span>
+      </div>
+      <div class="list__comments" *ngIf="userTrip.driver_comments.length > 0">
+        Мій коментар: {{userTrip.passenger_comments}} Відповідь водія: {{userTrip.driver_comments}}
       </div>
       <div class="list__button">
         <button 
@@ -117,10 +123,10 @@
       - доступно місць: {{ trip.current_available_places }}
     </div>
     <div class="list__detailTrip">
-      <div>Водій: {{ trip.driver.name }} ({{ trip.car_description }})</div>
-      <div>Коментар водія: {{ trip.driver_comments }}</div>
-      <div>Заберу: {{ trip.from_text_description }}</div>
-      <div>Довезу до: {{ trip.to_text_description }}</div>
+      Водій: {{ trip.driver.name }} ({{ trip.car_description }})
+      <span *ngIf="trip.driver_comments.length > 0">Коментар водія: {{ trip.driver_comments }}, </span>
+      <span *ngIf="trip.from_text_description.length > 0"> можу забрати: {{ trip.from_text_description }}, </span>
+      <span *ngIf="trip.to_text_description.length > 0">можу довезу до: {{ trip.to_text_description }}</span>
     </div>
     <div class="list__button">
       <button 

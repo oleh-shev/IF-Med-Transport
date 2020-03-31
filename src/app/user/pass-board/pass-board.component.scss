@@ -20,8 +20,8 @@ h1 {
     background-color: #ececec;
 }
 .list__state {
-    flex-basis: 80px;
-    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
     margin-right: 1em;
 }
 .list__info {
@@ -32,6 +32,9 @@ h1 {
     display: none;
     margin: 0.5em 3em;
 }
+.list__comments {
+    font-size: 0.9em;
+}
 .list__button {
     justify-self: end;
     margin: 0.2em 0;
@@ -40,19 +43,11 @@ h1 {
     margin-left: 0.5em;
     border-radius: 4px;
 }
-.list__state {
-    padding: 0 0.2em;
-    border: 1px solid black;
-    border-radius: 5px;
-}
 .visable {
     display: block;
 }
 .hidden {
     display: none;
-}
-button:focus {
-    background-color: blue;
 }
 .search-box {
     display: flex;
