@@ -1,7 +1,34 @@
-<button [routerLink]="['../add-trip']">Додати Поїздку</button>
-<div class="container">
+<div *ngIf="!isLogged" class="container">
+  <h1>Контент на даній сторінці доступний лише авторизованим користувачам</h1>
+</div>
+<div *ngIf="isLogged" class="container">
+  <div class="btn-add">
+    <button 
+    mat-raised-button
+    color="primary"
+     [routerLink]="['../add-trip']">Додати Поїздку</button>
+  </div>
   <h1>Мої поїздки</h1>
-  <div class="list" *ngFor="let driverTrip of driverTrips">
+  <div class="filter-box">
+    <button mat-raised-button
+      color="primary" 
+      (click)="filteringDriverTrips(['Active'])">
+      Активні
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+    (click)="filteringDriverTrips(['Copmplete'])">Завершені</button>
+    <button 
+    mat-raised-button
+      color="primary"
+      (click)="filteringDriverTrips(['Canceled'])">Скасовані</button>
+    <button 
+      mat-raised-button
+      color="primary"
+      (click)="filteringDriverTrips(stateTrip)">Всі</button>
+  </div>
+  <div class="list listbox" *ngFor="let driverTrip of filterDriverTrips">
     <div class="list__state">{{ driverTrip.state | tripState }}</div>
     <div class="list__info">
       {{ driverTrip.departure_time | date: "dd.MM - hh:mm" }} -
@@ -15,21 +42,27 @@
       </span>
     </div>
     <div class="list__detailTrip">
-      {{ driverTrip.driver_comments }},
-      можу забрати: {{ driverTrip.from_text_description }},
-      можу довезти: {{ driverTrip.to_text_description }}
+      <span *ngIf="driverTrip.driver_comments.length > 0">
+        {{ driverTrip.driver_comments }},
+      </span>
+      <span *ngIf="driverTrip.from_text_description.length > 0">
+        можу забрати: {{ driverTrip.from_text_description }},
+      </span>
+      <span *ngIf="driverTrip.to_text_description.length > 0">
+        можу довезти: {{ driverTrip.to_text_description }}
+      </span>
     </div>
     <div class="list__button">
       <button
         mat-stroked-button
-        color="prime"
+        color="primary"
         (click)="changeViewDetailTrip($event)"
       >
         Детально
       </button>
       <button
         mat-stroked-button
-        color="prime"
+        color="primary"
         (click)="cancelTrip(driverTrip.id)"
         [ngClass]="{ hidden: driverTrip.state == 'Canceled' || driverTrip.state == 'Complete' }"
       >
@@ -37,7 +70,7 @@
       </button>
       <button
         mat-stroked-button
-        color="prime"
+        color="primary"
         (click)="completeTrip(driverTrip.id)"
         [ngClass]="{ hidden: driverTrip.state == 'Canceled' || driverTrip.state == 'Complete' }"
       >
@@ -46,12 +79,15 @@
     </div>
     <div *ngIf="driverTrip.reservations.length" class="list__reservation">
       <div class="list__title">Заявки</div>
-      <div class="list sublist" *ngFor="let userTrip of driverTrip.reservations">
+      <div class="sublist listbox" *ngFor="let userTrip of driverTrip.reservations">
         <div class="list__state">{{ userTrip.state | reservationState }}</div>
         <div class="list__info">
           {{ userTrip.passenger.name }},
           {{ userTrip.passenger.phone_number}},
           Зарезервовано місць: {{ userTrip.places_number }}
+          <div class="list__info-comments" *ngIf="userTrip.passenger_comments.length > 0">
+           Коментар пасажира:  <em>{{userTrip.passenger_comments}}</em> 
+          </div>
         </div>
         <div class="list__detailTrip">
           {{ userTrip.passenger.description }},
@@ -61,14 +97,14 @@
         <div class="list__button">
           <button
             mat-stroked-button
-            color="prime"
+            color="primary"
             (click)="changeViewDetailTrip($event)"
           >
             Детально
           </button>
           <button
           mat-stroked-button
-          color="prime"
+          color="primary"
           (click)="openConfirmDialog(userTrip.id, 'Відхилити', 'Відхилити', false)"
           [ngClass]="{ hidden: userTrip.state == 'Rejected' || userTrip.state == 'Accepted' || userTrip.state == 'Canceled By Driver' }"
         >
@@ -76,7 +112,7 @@
         </button>
           <button
             mat-stroked-button
-            color="prime"
+            color="primary"
             (click)="openConfirmDialog(userTrip.id, 'Підтвердити', 'Підтвердити', true)"
             [ngClass]="{ hidden: userTrip.state == 'Rejected' || userTrip.state == 'Accepted' || userTrip.state == 'Canceled By Driver' }"
           >
@@ -84,7 +120,7 @@
           </button>
           <button
           mat-stroked-button
-          color="prime"
+          color="primary"
           (click)="cancelTripByDriver(userTrip.id)"
           [ngClass]="{ hidden: userTrip.state == 'Canceled By Driver' }"
         >

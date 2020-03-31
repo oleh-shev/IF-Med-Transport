@@ -3,8 +3,7 @@ import { ApiService } from 'src/app/shared/services/api.service';
 import { BoardService } from '../../shared/services/board.service'
 import { DriverBoardConfirmComponent } from './driver-board-confirm/driver-board-confirm.component';
 import { forkJoin, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-driver-board',
@@ -13,14 +12,27 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class DriverBoardComponent implements OnInit {
   driverTrips = [];
+  filterDriverTrips = [];
+  subscription: any;
+  isLogged: boolean;
+  stateTrip = ['Active', 'Compleate', 'Canceled']
 
   constructor(
     private apiservice: ApiService,
     public boardService: BoardService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
-    this.getUserTrips();
+    this.isLogged = this.authService.isTokenAvailable();
+    this.subscription = this.authService.isUserLogged().subscribe(data => {
+      this.isLogged = data;
+    });
+    (() => {
+      if (this.isLogged) {
+        this.getUserTrips();
+      }
+    })();
   }
 
   private getUserTrips() {
@@ -30,6 +42,7 @@ export class DriverBoardComponent implements OnInit {
       this.getTripWithReservation(results).subscribe( (res: any) => {
         console.log(res);
         this.driverTrips = res;
+        this.filterDriverTrips = this.driverTrips;
       }, this.boardService.error);
     }, this.boardService.error);
   }
@@ -74,7 +87,7 @@ export class DriverBoardComponent implements OnInit {
 
   changeViewDetailTrip(event) {
     let target = event.target;
-    let outerBox: HTMLElement = target.closest('.list');
+    let outerBox: HTMLElement = target.closest('.listbox');
     if (outerBox) {
       let detailBox = outerBox.getElementsByClassName('list__detailTrip').item(0);
       detailBox.classList.toggle('visable');
@@ -105,6 +118,12 @@ export class DriverBoardComponent implements OnInit {
         this.getUserTrips();
       }, this.boardService.error );
     }
+  }
+
+  filteringDriverTrips(condition: String[]) {
+    this.filterDriverTrips = this.driverTrips.filter( item => {
+      return condition.includes(item.state);
+    });
   }
 
 }

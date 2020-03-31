@@ -10,7 +10,8 @@ export class ApiService {
   // in case of interseptior missing add url into apiURI
   apiURI = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getFutureActiveTrips(): Observable<any> {
     return this.http.get(`${this.apiURI}future_active_trips`);
@@ -33,7 +34,7 @@ export class ApiService {
   }
 
   createReservePlaces(id: string, payload): Observable<any> {
-    return this.http.post(`${this.apiURI}trips/${id}/reserve_places/`, payload)
+    return this.http.post(`${this.apiURI}trips/${id}/reserve_places/`, payload);
   }
 
   cancelTripByPassenger(id: string, payload): Observable<any> {
@@ -47,14 +48,15 @@ export class ApiService {
   getTripById(id: string): Observable<any> {
     return this.http.get(`${this.apiURI}trips/${id}/`);
   }
+
   acceptTrip(id: string, payload): Observable<any> {
     return this.http.post(`${this.apiURI}trips/reservations/${id}/accept/`, payload);
   }
-  
+
   rejectTrip(id: string, payload): Observable<any> {
     return this.http.post(`${this.apiURI}trips/reservations/${id}/reject/`, payload);
   }
-  
+
   cancelTripByDriver(id: string, payload): Observable<any> {
     return this.http.post(`${this.apiURI}trips/reservations/${id}/cancel_by_driver/`, payload);
   }
@@ -65,6 +67,10 @@ export class ApiService {
 
   completeTrip(id: string, payload): Observable<any> {
     return this.http.post(`${this.apiURI}trips/${id}/complete/`, payload);
+  }
+
+  createTrip(payload): Observable<any> {
+    return this.http.post(`${this.apiURI}trips/`, payload);
   }
 
 }

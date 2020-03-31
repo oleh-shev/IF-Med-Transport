@@ -104,7 +104,7 @@
               [disabled]="!userData.valid"
               (click)="registerUser()">Зареєструватися та Увійти
       </button>
-      <button mat-stroked-button color="primary" type="button" id="cancel">Відміна</button>
+      <button mat-stroked-button color="primary" type="button" id="cancel" [routerLink]="['']">Відміна</button>
     </div>
   </form>
 </div>
