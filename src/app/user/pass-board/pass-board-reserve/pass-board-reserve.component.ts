@@ -13,7 +13,7 @@ export class PassBoardReserveComponent implements OnInit {
   
   constructor(
     public dialogRef: MatDialogRef<PassBoardReserveComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     ) { 
       dialogRef.disableClose = true;
