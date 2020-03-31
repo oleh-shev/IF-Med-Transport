@@ -28,7 +28,7 @@
       color="primary"
       (click)="filteringDriverTrips(stateTrip)">Всі</button>
   </div>
-  <div class="list" *ngFor="let driverTrip of filterDriverTrips">
+  <div class="list listbox" *ngFor="let driverTrip of filterDriverTrips">
     <div class="list__state">{{ driverTrip.state | tripState }}</div>
     <div class="list__info">
       {{ driverTrip.departure_time | date: "dd.MM - hh:mm" }} -
@@ -42,9 +42,15 @@
       </span>
     </div>
     <div class="list__detailTrip">
-      {{ driverTrip.driver_comments }},
-      можу забрати: {{ driverTrip.from_text_description }},
-      можу довезти: {{ driverTrip.to_text_description }}
+      <span *ngIf="driverTrip.driver_comments.length > 0">
+        {{ driverTrip.driver_comments }},
+      </span>
+      <span *ngIf="driverTrip.from_text_description.length > 0">
+        можу забрати: {{ driverTrip.from_text_description }},
+      </span>
+      <span *ngIf="driverTrip.to_text_description.length > 0">
+        можу довезти: {{ driverTrip.to_text_description }}
+      </span>
     </div>
     <div class="list__button">
       <button
@@ -73,12 +79,15 @@
     </div>
     <div *ngIf="driverTrip.reservations.length" class="list__reservation">
       <div class="list__title">Заявки</div>
-      <div class="list sublist" *ngFor="let userTrip of driverTrip.reservations">
+      <div class="sublist listbox" *ngFor="let userTrip of driverTrip.reservations">
         <div class="list__state">{{ userTrip.state | reservationState }}</div>
         <div class="list__info">
           {{ userTrip.passenger.name }},
           {{ userTrip.passenger.phone_number}},
           Зарезервовано місць: {{ userTrip.places_number }}
+          <div class="list__info-comments" *ngIf="userTrip.passenger_comments.length > 0">
+           Коментар пасажира:  <em>{{userTrip.passenger_comments}}</em> 
+          </div>
         </div>
         <div class="list__detailTrip">
           {{ userTrip.passenger.description }},
