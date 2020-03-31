@@ -1,10 +1,10 @@
-import {Component, LOCALE_ID, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepickerIntl} from '@angular/material';
 import {AppDateAdapter, APP_DATE_FORMATS} from '../../shared/mat-date-picker-config/format-datepicker';
 import {Router} from '@angular/router';
-import {Trip, Location} from '../../shared/entity.interface';
+import {Trip} from '../../shared/entity.interface';
 import * as moment from 'moment';
 import {ApiService} from '../../shared/services/api.service';
 
@@ -53,14 +53,11 @@ export class AddTripComponent implements OnInit {
   ngOnInit() {
     this.currDate = new Date();
     this.getLocations();
-    /*this.getLocations().subscribe((data: any) => {
-      this.locations = data.results;
-    });*/
   }
 
   getLocations() {
     this.api.getLocations().subscribe(data => {
-      this.locations = data.resuslts;
+      this.locations = data.results;
     });
   }
 
@@ -82,10 +79,7 @@ export class AddTripComponent implements OnInit {
     delete data.time;
     this.api.createTrip(data).subscribe(() => {
       this.route.navigate(['driver-board']);
-      }
-    /*this.http.post('trips/', data).subscribe(() => {
-      this.route.navigate(['driver-board']);
-    }*/, err => {
+    }, err => {
       const errors: Trip = err.error;
       Object.keys(errors).forEach(prop => {
         const formControl = this.tripData.get(prop);

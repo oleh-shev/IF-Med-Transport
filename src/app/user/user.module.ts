@@ -58,13 +58,13 @@ const routes: Routes = [
   providers: [
     PassBoardService,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule,
+    ],
   entryComponents: [
     PassBoardReserveComponent,
     DriverBoardConfirmComponent,
