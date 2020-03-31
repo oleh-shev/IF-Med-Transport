@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FutureTrip, Location, SubLocation, User } from '../../shared/entity.interface';
 import { ApiService } from '../../shared/services/api.service';
-import { mergeMap, map, } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { PassBoardService } from './pass-board.service';
 import { PassBoardReserveComponent } from './pass-board-reserve/pass-board-reserve.component';
-import { MatSnackBar } from '@angular/material';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { BoardService } from '../../shared/services/board.service'
 
 @Component({
   selector: 'app-pass-board',
@@ -33,9 +31,8 @@ export class PassBoardComponent implements OnInit {
   constructor(
     private apiservice: ApiService,
     private fb: FormBuilder,
-    public passBoardService: PassBoardService,
-    private snackBar: MatSnackBar,
     private authService: AuthService,
+    public boardService: BoardService,
     ) { }
 
   ngOnInit() {
@@ -67,12 +64,9 @@ export class PassBoardComponent implements OnInit {
     this.apiservice.getFutureActiveTrips()
     .subscribe( (res: any) => {
         this.futureActiveTrips = res.results.filter( item => !item.current_user_has_reservation);
-        console.log(this.futureActiveTrips);
         this.filteredFutureActiveTrips =  this.futureActiveTrips;
         this.setLocations();
-    }, (err: any) => {
-      this.openSnackBar(err.messages.message);
-    });
+    }, this.boardService.error);
   }
 
   /** set all location properties */
@@ -87,20 +81,15 @@ export class PassBoardComponent implements OnInit {
     this.apiservice.getInfoAboutMe()
     .subscribe( (res: any) => {
       this.passenger = res;
-    }, (err: any) => {
-      this.openSnackBar(err.messages.message);
-    });
+    }, this.boardService.error);
   }
 
   private getUserReservations() {
     this.apiservice.getUserReservations()
       .subscribe( (res: any) => {
-          console.log(res.results);
           this.userReservationTrips = res.results;
           this.filteredUserReservationTrips = this.userReservationTrips;
-      }, (err: any) => {
-        this.openSnackBar(err.messages.message);
-      });
+      }, this.boardService.error);
   }
 
   changeViewDetailTrip(event) {
@@ -108,7 +97,6 @@ export class PassBoardComponent implements OnInit {
     let outerBox: HTMLElement = target.closest('.list');
     if (outerBox) {
       let detailBox = outerBox.getElementsByClassName('list__detailTrip').item(0);
-      //parentElement.previousElementSibling;
       detailBox.classList.toggle('visable');
       if (detailBox.classList.contains('visable')) {
         target.innerText = 'Приховати';
@@ -158,7 +146,7 @@ export class PassBoardComponent implements OnInit {
 
     /** Reserved places */
   openReserveDialog(trip: FutureTrip): void {
-      this.passBoardService.reserveDialog(PassBoardReserveComponent, trip, (res) => this.reservePlaces(res));
+      this.boardService.modalDialog(PassBoardReserveComponent, trip, (res) => this.reservePlaces(res));
   }
 
   private reservePlaces(value) {
@@ -167,29 +155,18 @@ export class PassBoardComponent implements OnInit {
     this.apiservice.createReservePlaces(id, payload).subscribe(res => {
       this.getUserReservations();
       this.futureActiveTrips.filter( item => item.id === res.trip);
-      }, (err: any) => {
-        this.openSnackBar(err.detail);
-      });
+      }, this.boardService.error);
   }
   cancelTripByPassenger(id: string) {
     this.apiservice.cancelTripByPassenger(id, {}).subscribe( (res: any) => {
       this.getUserReservations();
       this.getFutureActiveTripsWithLocations();
-    }, (err: any) => {
-      this.openSnackBar(err.detail);
-    });
+    }, this.boardService.error);
   }
 
   filteringUserReservationTrips(condition: String[]) {
-    console.log(condition);
     this.filteredUserReservationTrips = this.userReservationTrips.filter( item => {
       return condition.includes(item.state);
-    });
-  }
-
-  openSnackBar(message: string) {
-    this.snackBar.open(message, '', {
-      duration: 3000,
     });
   }
 

@@ -10,7 +10,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PassBoardComponent } from './pass-board/pass-board.component';
 import { AddTripComponent } from './add-trip/add-trip.component';
 import { PassBoardReserveComponent } from './pass-board/pass-board-reserve/pass-board-reserve.component';
-import { PassBoardService } from './pass-board/pass-board.service';
 import { TripStatePipe } from '../shared/pipes/trip-state.pipe';
 import { DriverBoardComponent } from './driver-board/driver-board.component';
 import { ReservationStatePipe } from '../shared/pipes/reservation-state.pipe';
@@ -56,7 +55,7 @@ const routes: Routes = [
     UserComponent
   ],
   providers: [
-    PassBoardService,
+
   ],
   imports: [
     CommonModule,
