@@ -1,8 +1,15 @@
 .container {
     margin: 0 1em;
+    position: relative;
+}
+.btn-add {
+    position: absolute;
+    right: 0.5em;
+    top: 0;
 }
 h1 {
     font-size: 1.1em;
+    margin-bottom: 25px;
 }
 .filter-box {
     margin-bottom: 1em;
@@ -17,12 +24,12 @@ h1 {
     align-items: center;
     min-height: 35px;
 }
-.container > .list:nth-of-type(2n+1) {
+.container > .list:nth-of-type(2n) {
     background-color: #ececec;
 }
 .list__state {
-    flex-basis: 80px;
-    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
     margin-right: 1em;
 }
 .list__info {
@@ -41,19 +48,11 @@ h1 {
     margin-left: 0.5em;
     border-radius: 4px;
 }
-.list__state {
-    padding: 0 0.2em;
-    border: 1px solid black;
-    border-radius: 5px;
-}
 .visable {
     display: block;
 }
 .hidden {
     display: none;
-}
-button:focus {
-    background-color: blue;
 }
 .list__reservation {
     position: relative;
@@ -65,6 +64,7 @@ button:focus {
     display: inline-flex;
     width: 100%;
     padding: 0.5em auto;
+    min-height: 25px;
 
 }
 .list__title {
@@ -72,6 +72,8 @@ button:focus {
     width: 150px;
     text-align: center;
     top: -10px;
+    left: 140px;
     background-color: #ececec;
+    border: 1px solid #000;
     border-radius: 6px;;
 }
