@@ -30,11 +30,8 @@ export class ApiHttpInterceptor implements HttpInterceptor {
 
     return next.handle(apiReq).pipe(
       catchError(err => {
-        if (err instanceof HttpErrorResponse && err.status === 401) {
+        if (err instanceof HttpErrorResponse && err.status === 401 && this.authService.accessToken !== null) {
           return this.handle401Error(apiReq, next);
-        } else if (err instanceof HttpErrorResponse && err.status === 400) {
-          this.openSnackBar();
-          this.isRefreshing = false;
         } else {
           throw err;
         }
