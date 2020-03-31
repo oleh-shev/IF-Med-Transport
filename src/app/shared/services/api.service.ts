@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../entity.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class ApiService {
 
   getInfoAboutMe(): Observable<any> {
     return this.http.get(`${this.apiURI}auth/users/me/`);
+  }
+
+  updateUser(obj: User, id: any): Observable<any> {
+    return this.http.put(`${this.apiURI}auth/users/${id}/`, obj);
   }
 
   getLocations(): Observable<any> {
