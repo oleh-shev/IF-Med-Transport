@@ -76,7 +76,7 @@ export class AddTripComponent implements OnInit {
     delete data.date;
     delete data.time;
     this.http.post('trips/', data).subscribe(() => {
-      this.route.navigate(['home']);
+      this.route.navigate(['driver-board']);
     }, err => {
       const errors: Trip = err.error;
       Object.keys(errors).forEach(prop => {

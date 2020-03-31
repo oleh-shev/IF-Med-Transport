@@ -1,0 +1,27 @@
+<h1>{{data.title}} заявку</h1>
+<form [formGroup]="confirmForm" (ngSubmit)="onSubmit(data.id, data.state)">
+  <mat-form-field class="example-full-width"> 
+    <mat-label>Комментар</mat-label>
+    <input matInput
+      formControlName="driver_comments"
+      placeholder="Додайте коментар"
+    >
+  </mat-form-field>
+  <button
+    mat-stroked-button
+    color="primary"
+    type="submit"
+  >
+    {{data.action}}
+  </button>
+  <button
+    mat-stroked-button
+    color="primary"
+    type="button"
+    cdkFocusInitial
+    (click)="onDismiss()"
+  >
+    Відмінити
+  </button>
+</form>
+

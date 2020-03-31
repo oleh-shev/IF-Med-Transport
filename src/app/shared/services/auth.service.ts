@@ -53,6 +53,10 @@ export class AuthService {
   getUserInfo() {
     return this.http.get(`auth/users/${this.getUserId()}/`);
   }
+  isTokenAvailable() {
+    const token = this.accessToken;
+    return  token !== null;
+  }
 
   logOut() {
     return this.http.post('auth/jwt/blacklist/', {

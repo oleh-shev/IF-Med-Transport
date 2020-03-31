@@ -11,9 +11,6 @@
       </mat-menu>
     </ng-container>
     <ng-container *ngIf="isLogged">
-    <button mat-button [routerLink]="['../driver-board']">Сторінка водія</button>
-    <button mat-button [routerLink]="['../pass-board']">Сторінка пасажира</button>
-    <button mat-button [routerLink]="['../add-trip']">Створити поїздку</button>
       <button *ngIf="isLogged" mat-button [matMenuTriggerFor]="profile_menu">
         {{(authService.currentUser | async)?.first_name  }}
         <span class="material-icons">

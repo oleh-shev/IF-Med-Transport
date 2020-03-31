@@ -1,3 +1,4 @@
+<button [routerLink]="['../add-trip']">Додати Поїздку</button>
 <div class="container">
   <h1>Мої поїздки</h1>
   <div class="list" *ngFor="let driverTrip of driverTrips">
@@ -15,7 +16,7 @@
     </div>
     <div class="list__detailTrip">
       {{ driverTrip.driver_comments }},
-      можу забрати: {{ driverTrip.from_text_description }}, 
+      можу забрати: {{ driverTrip.from_text_description }},
       можу довезти: {{ driverTrip.to_text_description }}
     </div>
     <div class="list__button">
@@ -29,6 +30,7 @@
       <button
         mat-stroked-button
         color="prime"
+        (click)="cancelTrip(driverTrip.id)"
         [ngClass]="{ hidden: driverTrip.state == 'Canceled' || driverTrip.state == 'Complete' }"
       >
         Скасувати
@@ -36,45 +38,59 @@
       <button
         mat-stroked-button
         color="prime"
-        [ngClass]="{ hidden: driverTrip.state == 'Complete' }"
+        (click)="completeTrip(driverTrip.id)"
+        [ngClass]="{ hidden: driverTrip.state == 'Canceled' || driverTrip.state == 'Complete' }"
       >
         Завершити
       </button>
     </div>
-    <div class="list sublist" *ngFor="let userTrip of driverTrip.reservations">
-      <div class="list__state">{{ userTrip.state | reservationState }}</div>
-      <div class="list__info">
-        {{ userTrip.passenger.name }},
-        {{ userTrip.passenger.phone_number}},
-        Зарезервовано місць: {{ userTrip.places_number }}
-      </div>
-      <div class="list__detailTrip">
-        {{ userTrip.passenger.description }},
-        дата реєстрації: {{ userTrip.passenger.date_joined | date: "dd.MM.yy" }},
-        {{ userTrip.passenger_comments }}
-      </div>
-      <div class="list__button">
-        <button
+    <div *ngIf="driverTrip.reservations.length" class="list__reservation">
+      <div class="list__title">Заявки</div>
+      <div class="list sublist" *ngFor="let userTrip of driverTrip.reservations">
+        <div class="list__state">{{ userTrip.state | reservationState }}</div>
+        <div class="list__info">
+          {{ userTrip.passenger.name }},
+          {{ userTrip.passenger.phone_number}},
+          Зарезервовано місць: {{ userTrip.places_number }}
+        </div>
+        <div class="list__detailTrip">
+          {{ userTrip.passenger.description }},
+          дата реєстрації: {{ userTrip.passenger.date_joined | date: "dd.MM.yy" }},
+          {{ userTrip.passenger_comments }}
+        </div>
+        <div class="list__button">
+          <button
+            mat-stroked-button
+            color="prime"
+            (click)="changeViewDetailTrip($event)"
+          >
+            Детально
+          </button>
+          <button
           mat-stroked-button
           color="prime"
-          (click)="changeViewDetailTrip($event)"
+          (click)="openConfirmDialog(userTrip.id, 'Відхилити', 'Відхилити', false)"
+          [ngClass]="{ hidden: userTrip.state == 'Rejected' || userTrip.state == 'Accepted' || userTrip.state == 'Canceled By Driver' }"
         >
-          Детально
+          Відхилити
         </button>
-        <button
+          <button
+            mat-stroked-button
+            color="prime"
+            (click)="openConfirmDialog(userTrip.id, 'Підтвердити', 'Підтвердити', true)"
+            [ngClass]="{ hidden: userTrip.state == 'Rejected' || userTrip.state == 'Accepted' || userTrip.state == 'Canceled By Driver' }"
+          >
+            Підтвердити
+          </button>
+          <button
           mat-stroked-button
           color="prime"
-          [ngClass]="{ hidden: userTrip.state == 'Accepted' }"
+          (click)="cancelTripByDriver(userTrip.id)"
+          [ngClass]="{ hidden: userTrip.state == 'Canceled By Driver' }"
         >
-          Підтвердити
+          Скасувати
         </button>
-        <button
-        mat-stroked-button
-        color="prime"
-        [ngClass]="{ hidden: userTrip.state == 'Rejected' }"
-      >
-        Скасувати
-      </button>
+        </div>
       </div>
     </div>
   </div>

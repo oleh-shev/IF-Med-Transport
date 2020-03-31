@@ -16,6 +16,7 @@ import { DriverBoardComponent } from './driver-board/driver-board.component';
 import { ReservationStatePipe } from '../shared/pipes/reservation-state.pipe';
 import { UserProfileComponent } from './user-profile/user-profile/user-profile.component';
 import { MaterialModule } from '../shared/material-module/material.module';
+import { DriverBoardConfirmComponent } from './driver-board/driver-board-confirm/driver-board-confirm.component';
 
 
 
@@ -49,6 +50,7 @@ const routes: Routes = [
     TripStatePipe,
     DriverBoardComponent,
     ReservationStatePipe,
+    DriverBoardConfirmComponent,
   ],
   exports: [
     UserComponent
@@ -65,6 +67,7 @@ const routes: Routes = [
   ],
   entryComponents: [
     PassBoardReserveComponent,
+    DriverBoardConfirmComponent,
   ]
 })
 export class UserModule {

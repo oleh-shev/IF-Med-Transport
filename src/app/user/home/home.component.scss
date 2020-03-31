@@ -1,0 +1,53 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 60%;
+  margin: 1.5em auto;
+  h1 {
+    margin: auto;
+    font-family: OpenSymbol sans-serif;
+  }
+}
+
+.navigation {
+  width: 90%;
+  height: 10%;
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  button {
+    width: 35%;
+    height: 100%;
+    color: #1174CF;
+  }
+  ::ng-deep .mat-button-wrapper {
+    font-size: xx-large;
+  }
+}
+
+.service-container {
+  width: 90%;
+  margin: 1.5em auto 1em;
+}
+
+p {
+  text-align: justify;
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    width: 90%;
+    h1 {
+      text-align: center;
+    }
+  }
+  .navigation {
+    ::ng-deep .mat-button-wrapper {
+      font-size: 1em;
+    }
+    button {
+      width: 50%;
+    }
+  }
+}

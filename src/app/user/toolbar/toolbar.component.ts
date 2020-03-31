@@ -19,6 +19,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLogged = this.authService.isTokenAvailable();
     this.subscription = this.authService.isUserLogged()
     .pipe(
       switchMap(data => {
