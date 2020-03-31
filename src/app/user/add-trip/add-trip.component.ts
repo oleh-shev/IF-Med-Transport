@@ -4,8 +4,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDatepickerIntl} from '@angular/material';
 import {AppDateAdapter, APP_DATE_FORMATS} from '../../shared/mat-date-picker-config/format-datepicker';
 import {Router} from '@angular/router';
-import {Trip} from '../../shared/entity.interface';
+import {Trip, Location} from '../../shared/entity.interface';
 import * as moment from 'moment';
+import {ApiService} from '../../shared/services/api.service';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class AddTripComponent implements OnInit {
     private http: HttpClient,
     private fb: FormBuilder,
     private route: Router,
+    private api: ApiService,
   ) {
     this.tripData = this.fb.group({
       date: ['', [Validators.required]],
@@ -50,13 +52,16 @@ export class AddTripComponent implements OnInit {
 
   ngOnInit() {
     this.currDate = new Date();
-    this.getLocations().subscribe((data: any) => {
+    this.getLocations();
+    /*this.getLocations().subscribe((data: any) => {
       this.locations = data.results;
-    });
+    });*/
   }
 
   getLocations() {
-    return this.http.get('locations/');
+    this.api.getLocations().subscribe(data => {
+      this.locations = data.resuslts;
+    });
   }
 
 
@@ -75,9 +80,12 @@ export class AddTripComponent implements OnInit {
     data.departure_time = this.formDeparture(data.date, data.time);
     delete data.date;
     delete data.time;
-    this.http.post('trips/', data).subscribe(() => {
+    this.api.createTrip(data).subscribe(() => {
       this.route.navigate(['driver-board']);
-    }, err => {
+      }
+    /*this.http.post('trips/', data).subscribe(() => {
+      this.route.navigate(['driver-board']);
+    }*/, err => {
       const errors: Trip = err.error;
       Object.keys(errors).forEach(prop => {
         const formControl = this.tripData.get(prop);
