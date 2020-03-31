@@ -1,1 +1,35 @@
-<p>user-profile works!</p>
+
+<mat-card class="profile_card">
+    <mat-card-title class="header">
+        <h3>Профіль</h3>
+    </mat-card-title>
+
+    <mat-card-content class="view__profile">
+        <div class="view__profile_container">
+            <div class="profile_photo">
+                 <img class="photo" alt="Фото профілю" [src]="img">
+            </div>
+
+            <div class="profile_information">
+                <div class="profile_information_content profile_header">
+                    <h1>{{concatName(this.obj.first_name, this.obj.last_name)}}</h1>
+                    <h5 class="s_description">{{this.obj.description}}</h5>
+                </div>
+            
+
+                <div class="profile_information_content">
+                    <div class="s_title">Телефон</div>
+                    <div class="s_description">380665600730</div>
+                </div>
+                
+                <div class="profile_information_content">
+                    <div class="s_title">Пошта</div>
+                    <div class="s_description">yurakhomits8@gmail.com</div>
+                </div>
+
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+
