@@ -155,7 +155,7 @@ export class PassBoardComponent implements OnInit {
       this.getUserReservations();
       this.futureActiveTrips.filter( item => item.id === res.trip);
       }, (err: any) => {
-        this.openSnackBar(err.detail);
+        this.openSnackBar(err.error.detail);
       });
   }
   cancelTripByPassenger(id: string) {
@@ -163,7 +163,7 @@ export class PassBoardComponent implements OnInit {
       this.getUserReservations();
       this.getFutureActiveTripsWithLocations();
     }, (err: any) => {
-      this.openSnackBar(err.detail);
+      this.openSnackBar(err.error.detail);
     });
   }
 
