@@ -15,7 +15,7 @@ export class UserProfileComponent implements OnInit {
 
   user: User;
 
-  constructor(private authService: AuthService, private apiService: ApiService, private snackBar: MatSnackBar) { }
+  constructor(public authService: AuthService, private apiService: ApiService, private snackBar: MatSnackBar) { }
   profileForm = new FormGroup({
     first_name: new FormControl('',
     [
