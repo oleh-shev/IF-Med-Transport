@@ -1,58 +1,60 @@
 <div class="container">
-  <h1>Мої поїздки</h1>
-  <div class="filter-box">
-    <button mat-stroked-button
-      color="prime" 
-      (click)="filteringUserReservationTrips(['Pending'])">
-      Непідтверджені
-    </button>
-    <button
-      mat-stroked-button
-      color="prime"
-    (click)="filteringUserReservationTrips(['Accepted'])">Підтверджені</button>
-    <button 
-      mat-stroked-button
-      color="prime"
-      (click)="filteringUserReservationTrips(['Rejected', 'Canceled By Passenger', 'Canceled By Driver', 'Trip Canceled'])">Скасовані</button>
-    <button 
-      mat-stroked-button
-      color="prime"
-      (click)="filteringUserReservationTrips(stateTrip)">Всі</button>
-  </div>
-  <div class="list" *ngFor="let userTrip of filteredUserReservationTrips">
-    <div class="list__state">{{ userTrip.state | reservationState }}</div>
-    <div class="list__info">
-      {{ userTrip.trip.departure_time | date: "dd.MM - hh:mm" }} -
-      {{ userTrip.trip.from_location_1.name }}
-      <span *ngIf="userTrip.trip.from_location_2"
-        >({{ userTrip.trip.from_location_2.name }})</span
-      >
-      - {{ userTrip.trip.to_location_1.name }}
-      <span *ngIf="userTrip.trip.to_location_2"
-        >({{ userTrip.trip.to_location_2.name }})
-      </span>
+  <div *ngIf="isLogged">
+    <h1>Мої поїздки</h1>
+    <div class="filter-box">
+      <button mat-stroked-button
+        color="prime" 
+        (click)="filteringUserReservationTrips(['Pending'])">
+        Непідтверджені
+      </button>
+      <button
+        mat-stroked-button
+        color="prime"
+      (click)="filteringUserReservationTrips(['Accepted'])">Підтверджені</button>
+      <button 
+        mat-stroked-button
+        color="prime"
+        (click)="filteringUserReservationTrips(['Rejected', 'Canceled By Passenger', 'Canceled By Driver', 'Trip Canceled'])">Скасовані</button>
+      <button 
+        mat-stroked-button
+        color="prime"
+        (click)="filteringUserReservationTrips(stateTrip)">Всі</button>
     </div>
-    <div class="list__detailTrip">
-      <div>
-        Водій: {{ userTrip.trip.driver.name }} ({{
-          userTrip.trip.car_description
-        }})
+    <div class="list" *ngFor="let userTrip of filteredUserReservationTrips">
+      <div class="list__state">{{ userTrip.state | reservationState }}</div>
+      <div class="list__info">
+        {{ userTrip.trip.departure_time | date: "dd.MM - hh:mm" }} -
+        {{ userTrip.trip.from_location_1.name }}
+        <span *ngIf="userTrip.trip.from_location_2"
+          >({{ userTrip.trip.from_location_2.name }})</span
+        >
+        - {{ userTrip.trip.to_location_1.name }}
+        <span *ngIf="userTrip.trip.to_location_2"
+          >({{ userTrip.trip.to_location_2.name }})
+        </span>
       </div>
-      <div>Коментар водія: {{ userTrip.trip.driver_comments }} {{userTrip.driver_comments}} </div>
-      <div>Заберу: {{ userTrip.trip.from_text_description }}</div>
-      <div>Довезу до: {{ userTrip.trip.to_text_description }}</div>
-    </div>
-    <div class="list__button">
-      <button 
-        mat-stroked-button
-        color="prime"
-      (click)="changeViewDetailTrip($event)">Детально</button>
-      <button 
-        mat-stroked-button
-        color="prime"
-        (click)="cancelTripByPassenger(userTrip.id)"
-        [ngClass]="{hidden: userTrip.state == 'Canceled By Passenger'}"
-        >Відмовитися</button>
+      <div class="list__detailTrip">
+        <div>
+          Водій: {{ userTrip.trip.driver.name }} ({{
+            userTrip.trip.car_description
+          }})
+        </div>
+        <div>Коментар водія: {{ userTrip.trip.driver_comments }} {{userTrip.driver_comments}} </div>
+        <div>Заберу: {{ userTrip.trip.from_text_description }}</div>
+        <div>Довезу до: {{ userTrip.trip.to_text_description }}</div>
+      </div>
+      <div class="list__button">
+        <button 
+          mat-stroked-button
+          color="prime"
+        (click)="changeViewDetailTrip($event)">Детально</button>
+        <button 
+          mat-stroked-button
+          color="prime"
+          (click)="cancelTripByPassenger(userTrip.id)"
+          [ngClass]="{hidden: userTrip.state == 'Canceled By Passenger'}"
+          >Відмовитися</button>
+      </div>
     </div>
   </div>
 
@@ -125,7 +127,7 @@
         mat-stroked-button
         color="prime"
         (click)="changeViewDetailTrip($event)">Детально</button>
-      <button 
+      <button *ngIf="isLogged"
         mat-stroked-button
         color="prime"
         (click)="openReserveDialog(trip)">Зарезервувати</button>

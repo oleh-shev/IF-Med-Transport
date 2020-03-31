@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { PassBoardService } from './pass-board.service';
 import { PassBoardReserveComponent } from './pass-board-reserve/pass-board-reserve.component';
 import { MatSnackBar } from '@angular/material';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-pass-board',
@@ -24,6 +25,9 @@ export class PassBoardComponent implements OnInit {
   listSubLocationFrom: SubLocation[] = [];
   listLocations: Location[] = [];
   searchForm: FormGroup;
+  filterDriverTrips = [];
+  subscription: any;
+  isLogged: boolean;
   stateTrip = [ 'Pending', 'Accepted', 'Rejected', 'Canceled By Passenger', 'Canceled By Driver', 'Trip Canceled']
 
   constructor(
@@ -31,12 +35,21 @@ export class PassBoardComponent implements OnInit {
     private fb: FormBuilder,
     public passBoardService: PassBoardService,
     private snackBar: MatSnackBar,
+    private authService: AuthService,
     ) { }
 
   ngOnInit() {
+    this.isLogged = this.authService.isTokenAvailable();
+    this.subscription = this.authService.isUserLogged().subscribe(data => {
+      this.isLogged = data;
+    });
     this.getFutureActiveTripsWithLocations();
-    this.getUserReservations()
-    this.getInfoAboutMe();
+    (() => {
+      if (this.isLogged) {
+        this.getUserReservations()
+        this.getInfoAboutMe();
+      }
+    })();
     this.createFormForSearchTrip();
     this.onChangeFieldsSearchForm();
   }
