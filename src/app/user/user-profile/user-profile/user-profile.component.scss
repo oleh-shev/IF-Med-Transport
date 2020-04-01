@@ -31,11 +31,15 @@ mat-form-field {
   height: 250px;
 }
 
-.profile_card {
+.wrap {
   top: 40%;
-  color: black;
+  left: 50%;
+  transform: translate(-50%, 0%);
   position: absolute;
+}
 
+.profile_card {
+  color: black;
 }
 
 .form_actions {
@@ -87,3 +91,8 @@ mat-form-field {
   }
 }
 
+@media screen and (max-width: 670px){
+  .profile_card{
+    
+  }
+}
