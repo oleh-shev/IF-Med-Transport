@@ -10,21 +10,21 @@
   </div>
   <h1>Мої поїздки</h1>
   <div class="filter-box">
-    <button mat-raised-button
+    <button mat-stroked-button
       color="primary" 
       (click)="filteringDriverTrips(['Active'])">
       Активні
     </button>
     <button
-      mat-raised-button
+      mat-stroked-button
       color="primary"
     (click)="filteringDriverTrips(['Copmplete'])">Завершені</button>
     <button 
-    mat-raised-button
+      mat-stroked-button
       color="primary"
       (click)="filteringDriverTrips(['Canceled'])">Скасовані</button>
     <button 
-      mat-raised-button
+      mat-stroked-button
       color="primary"
       (click)="filteringDriverTrips(stateTrip)">Всі</button>
   </div>
@@ -43,26 +43,26 @@
     </div>
     <div class="list__detailTrip">
       <span *ngIf="driverTrip.driver_comments.length > 0">
-        {{ driverTrip.driver_comments }},
+        <em>{{ driverTrip.driver_comments }} </em>
       </span>
       <span *ngIf="driverTrip.from_text_description.length > 0">
-        можу забрати: {{ driverTrip.from_text_description }},
+        , можу забрати: <em>{{ driverTrip.from_text_description }}</em>
       </span>
       <span *ngIf="driverTrip.to_text_description.length > 0">
-        можу довезти: {{ driverTrip.to_text_description }}
+       , можу довезти: <em>{{ driverTrip.to_text_description }} </em>
       </span>
     </div>
     <div class="list__button">
       <button
         mat-stroked-button
-        color="primary"
+        color="basic"
         (click)="changeViewDetailTrip($event)"
       >
         Детально
       </button>
       <button
         mat-stroked-button
-        color="primary"
+        color="warn"
         (click)="cancelTrip(driverTrip.id)"
         [ngClass]="{ hidden: driverTrip.state == 'Canceled' || driverTrip.state == 'Complete' }"
       >
@@ -70,7 +70,7 @@
       </button>
       <button
         mat-stroked-button
-        color="primary"
+        color="accent"
         (click)="completeTrip(driverTrip.id)"
         [ngClass]="{ hidden: driverTrip.state == 'Canceled' || driverTrip.state == 'Complete' }"
       >
@@ -86,25 +86,24 @@
           {{ userTrip.passenger.phone_number}},
           Зарезервовано місць: {{ userTrip.places_number }}
           <div class="list__info-comments" *ngIf="userTrip.passenger_comments.length > 0">
-           Коментар пасажира:  <em>{{userTrip.passenger_comments}}</em> 
+            {{ userTrip.passenger.name }}:  <em>{{userTrip.passenger_comments}}</em> 
           </div>
         </div>
         <div class="list__detailTrip">
-          {{ userTrip.passenger.description }},
-          дата реєстрації: {{ userTrip.passenger.date_joined | date: "dd.MM.yy" }},
-          {{ userTrip.passenger_comments }}
+          <em>Професія: {{ userTrip.passenger.description }}, </em>
+          на сервісі з: <em> {{ userTrip.passenger.date_joined | date: "dd.MM.yy" }} </em>
         </div>
         <div class="list__button">
           <button
             mat-stroked-button
-            color="primary"
+            color="basic"
             (click)="changeViewDetailTrip($event)"
           >
             Детально
           </button>
           <button
           mat-stroked-button
-          color="primary"
+          color="warn"
           (click)="openConfirmDialog(userTrip.id, 'Відхилити', 'Відхилити', false)"
           [ngClass]="{ hidden: userTrip.state == 'Rejected' || userTrip.state == 'Accepted' || userTrip.state == 'Canceled By Driver' }"
         >
@@ -112,7 +111,7 @@
         </button>
           <button
             mat-stroked-button
-            color="primary"
+            color="accent"
             (click)="openConfirmDialog(userTrip.id, 'Підтвердити', 'Підтвердити', true)"
             [ngClass]="{ hidden: userTrip.state == 'Rejected' || userTrip.state == 'Accepted' || userTrip.state == 'Canceled By Driver' }"
           >
@@ -120,7 +119,7 @@
           </button>
           <button
           mat-stroked-button
-          color="primary"
+          color="warn"
           (click)="cancelTripByDriver(userTrip.id)"
           [ngClass]="{ hidden: userTrip.state == 'Canceled By Driver' }"
         >
