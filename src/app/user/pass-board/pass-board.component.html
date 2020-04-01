@@ -15,7 +15,7 @@
         mat-stroked-button
         color="prime"
         (click)="filteringUserReservationTrips(['Rejected', 'Canceled By Passenger', 'Canceled By Driver', 'Trip Canceled'])">Скасовані</button>
-      <button 
+      <button id="all"
         mat-stroked-button
         color="prime"
         (click)="filteringUserReservationTrips(stateTrip)">Всі</button>
@@ -25,29 +25,29 @@
       <div class="list__info">
         {{ userTrip.trip.departure_time | date: "dd.MM - hh:mm" }} -
         {{ userTrip.trip.from_location_1.name }}
-        <span *ngIf="userTrip.trip.from_location_2"
-          >({{ userTrip.trip.from_location_2.name }})</span
-        >
+        <span *ngIf="userTrip.trip.from_location_2">
+          ({{ userTrip.trip.from_location_2.name }})
+        </span>
         - {{ userTrip.trip.to_location_1.name }}
-        <span *ngIf="userTrip.trip.to_location_2"
-          >({{ userTrip.trip.to_location_2.name }})
+        <span *ngIf="userTrip.trip.to_location_2">
+          ({{ userTrip.trip.to_location_2.name }})
         </span>
         <div class="list__info-comments" *ngIf="userTrip.driver_comments.length > 0">
-          Мій коментар: <em>{{userTrip.passenger_comments}} </em> 
-          Відповідь водія: <em>{{userTrip.driver_comments}} </em>
+          {{userTrip.passenger.name}}: <em>{{userTrip.passenger_comments}} </em> 
+          {{ userTrip.trip.driver.name }}: <em>{{userTrip.driver_comments}} </em>
         </div>
       </div>
       <div class="list__detailTrip">
           Водій: {{ userTrip.trip.driver.name }} {{ userTrip.trip.driver.phone_number }} 
           ({{ userTrip.trip.car_description }})
         <span *ngIf="userTrip.trip.driver_comments.length > 0">
-          Коментар водія: {{ userTrip.trip.driver_comments }},
+          Коментар водія: <em> {{ userTrip.trip.driver_comments }} </em>
         </span>
         <span *ngIf="userTrip.trip.from_text_description.length > 0"> 
-          можу забрати: {{ userTrip.trip.from_text_description }},
+          можу забрати: <em>, {{ userTrip.trip.from_text_description }}, </em>
         </span>
         <span *ngIf="userTrip.trip.to_text_description.length > 0">
-          можу довезу до: {{ userTrip.trip.to_text_description }}
+          можу довезу до: <em>, {{ userTrip.trip.to_text_description }} </em>
         </span>
       </div>
       <div class="list__button">
@@ -68,7 +68,7 @@
   <h1 class="title">Доступні поїздки</h1>
   <div class="search-box">
     <form [formGroup]="searchForm">
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="example-full-width" style="min-width: 150px">
         <mat-label>Звідки(місто)</mat-label>
         <mat-select
           formControlName="from_location"
@@ -125,9 +125,9 @@
     </div>
     <div class="list__detailTrip">
       Водій: {{ trip.driver.name }} ({{ trip.car_description }})
-      <span *ngIf="trip.driver_comments.length > 0">Коментар водія: {{ trip.driver_comments }}, </span>
-      <span *ngIf="trip.from_text_description.length > 0"> можу забрати: {{ trip.from_text_description }}, </span>
-      <span *ngIf="trip.to_text_description.length > 0">можу довезу до: {{ trip.to_text_description }}</span>
+      <span *ngIf="trip.from_text_description.length > 0"> можу забрати: <em>{{ trip.from_text_description }}, </em> </span>
+      <span *ngIf="trip.to_text_description.length > 0"> можу довезу до:<em>{{ trip.to_text_description }} </em> </span>
+      <span *ngIf="trip.driver_comments.length > 0"> Коментар водія: <em>{{ trip.driver_comments }} </em> </span>
     </div>
     <div class="list__button">
       <button 
