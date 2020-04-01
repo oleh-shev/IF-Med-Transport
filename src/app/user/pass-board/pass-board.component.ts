@@ -117,7 +117,6 @@ export class PassBoardComponent implements OnInit {
           this.filteredFutureActiveTrips = this.filteredFutureActiveTrips
             .filter(item => {
               if (item.from_location_2) {
-                console.log(item.from_location_2.id == value.from_sublocation);
                 return item.from_location_2.id == value.from_sublocation;
               } else {
                 return false;
