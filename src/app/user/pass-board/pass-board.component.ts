@@ -115,7 +115,13 @@ export class PassBoardComponent implements OnInit {
         }
         if (value.from_sublocation) {
           this.filteredFutureActiveTrips = this.filteredFutureActiveTrips
-            .filter(item => item.from_location_2.id == value.from_location);
+            .filter(item => {
+              if (item.from_location_2) {
+                return item.from_location_2.id == value.from_sublocation;
+              } else {
+                return false;
+              }
+            });
         }
         if (value.to_location) {
           this.filteredFutureActiveTrips = this.filteredFutureActiveTrips
@@ -123,7 +129,13 @@ export class PassBoardComponent implements OnInit {
         }
         if (value.to_sublocation) {
           this.filteredFutureActiveTrips = this.filteredFutureActiveTrips
-          .filter(item => item.to_location_2.id == value.to_sublocation);
+          .filter(item => {
+            if (item.to_location_2) {
+              return item.to_location_2.id == value.to_sublocation
+            } else {
+              return false
+            }
+          });
         }
         this.setLocations();
       });
