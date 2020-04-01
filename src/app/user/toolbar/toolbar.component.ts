@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
 import { switchMap } from 'rxjs/operators';
 import { User } from 'src/app/shared/entity.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -15,6 +16,7 @@ export class ToolbarComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    private route: Router
   ) {
   }
 
@@ -26,13 +28,15 @@ export class ToolbarComponent implements OnInit {
     if (this.authService.isTokenAvailable()) {
       this.authService.getUserInfo()
       .subscribe((data: User) => {
-        console.log('How many times');
+        console.log('How many times(toolbar)');
         this.authService.currentUser.next(data);
       });
     }
   }
   logOut() {
     this.authService.logOut().subscribe();
+    this.route.navigate(['']);
+    this.authService.currentUser.next(null);
   }
 
 }
