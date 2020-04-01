@@ -8,7 +8,7 @@ h1 {
 .filter-box {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 1em;
 }
 #all {
@@ -43,7 +43,7 @@ h1 {
     font-size: 0.9em;
 }
 .list__button {
-    justify-self: end;
+    justify-self: flex-end;
     margin: 0.2em 0;
 }
 .list__button > button, .filter-box > button, .search-box button{
@@ -73,6 +73,9 @@ h1 {
     ::ng-deep .mat-form-field-infix {
         min-width: 150px !important;
         width: auto !important;
+    }
+    .filter-box {
+        justify-content: space-between;
     }
     .filter-box ::ng-deep .mat-stroked-button {
         padding: 0 10px !important;

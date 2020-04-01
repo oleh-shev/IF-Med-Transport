@@ -3,21 +3,21 @@
     <h1>Мої поїздки</h1>
     <div class="filter-box">
       <button mat-stroked-button
-        color="prime" 
+        color="primary" 
         (click)="filteringUserReservationTrips(['Pending'])">
         Непідтверджені
       </button>
       <button
         mat-stroked-button
-        color="prime"
+        color="primary"
       (click)="filteringUserReservationTrips(['Accepted'])">Підтверджені</button>
       <button 
         mat-stroked-button
-        color="prime"
+        color="primary"
         (click)="filteringUserReservationTrips(['Rejected', 'Canceled By Passenger', 'Canceled By Driver', 'Trip Canceled'])">Скасовані</button>
       <button id="all"
         mat-stroked-button
-        color="prime"
+        color="primary"
         (click)="filteringUserReservationTrips(stateTrip)">Всі</button>
     </div>
     <div class="list" *ngFor="let userTrip of filteredUserReservationTrips">
@@ -53,11 +53,11 @@
       <div class="list__button">
         <button 
           mat-stroked-button
-          color="prime"
+          color="basic"
         (click)="changeViewDetailTrip($event)">Детально</button>
         <button 
           mat-stroked-button
-          color="prime"
+          color="warn"
           (click)="cancelTripByPassenger(userTrip.id)"
           [ngClass]="{hidden: userTrip.state == 'Canceled By Passenger'}"
           >Відмовитися</button>
@@ -132,11 +132,11 @@
     <div class="list__button">
       <button 
         mat-stroked-button
-        color="prime"
+        color="basic"
         (click)="changeViewDetailTrip($event)">Детально</button>
       <button *ngIf="isLogged"
         mat-stroked-button
-        color="prime"
+        color="accent"
         (click)="openReserveDialog(trip)">Зарезервувати</button>
     </div>
   </div>
