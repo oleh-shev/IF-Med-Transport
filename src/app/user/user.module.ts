@@ -16,12 +16,14 @@ import { ReservationStatePipe } from '../shared/pipes/reservation-state.pipe';
 import { UserProfileComponent } from './user-profile/user-profile/user-profile.component';
 import { MaterialModule } from '../shared/material-module/material.module';
 import { DriverBoardConfirmComponent } from './driver-board/driver-board-confirm/driver-board-confirm.component';
+import { AuthGuard } from '../guard/auth.guard';
+import { NotFoundComponent } from '../shared/error-page/not-found/not-found.component';
 
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'profile', component: UserProfileComponent},
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
   {
@@ -31,8 +33,10 @@ const routes: Routes = [
     path: 'pass-board', component: PassBoardComponent
   },
   {
-    path: 'driver-board', component: DriverBoardComponent
-  }
+    path: 'driver-board', component: DriverBoardComponent, canActivate: [AuthGuard]
+  },
+  { path: '404', component: NotFoundComponent},
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({
@@ -50,6 +54,7 @@ const routes: Routes = [
     DriverBoardComponent,
     ReservationStatePipe,
     DriverBoardConfirmComponent,
+    NotFoundComponent
   ],
   exports: [
     UserComponent

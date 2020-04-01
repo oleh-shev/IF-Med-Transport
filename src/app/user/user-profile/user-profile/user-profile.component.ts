@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { defaultImage } from 'src/app/shared/default-image/default-image';
 import { User } from 'src/app/shared/entity.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { MatSnackBar } from '@angular/material';
+import { images, defaultImage } from 'src/app/shared/images';
 
 @Component({
   selector: 'app-user-profile',

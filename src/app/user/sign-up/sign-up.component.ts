@@ -4,6 +4,8 @@ import {PasswordValidation} from '../../shared/services/password-validator';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {User} from '../../shared/entity.interface';
+import { pipe } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-up',
@@ -42,7 +44,13 @@ export class SignUpComponent implements OnInit {
     const data = this.userData.value;
     delete data.confirm_password;
     data.phone_number = `+380${data.phone_number}`;
-    this.authService.signUp(data).subscribe(response => {
+    this.authService.signUp(data)
+    .pipe(
+      switchMap(() => this.authService.getUserInfo())
+    )
+    .subscribe((user: User) => {
+      console.log('Autorization');
+      this.authService.currentUser.next(user);
       this.route.navigate(['']);
     }, err => {
       const errors: User = err.error;

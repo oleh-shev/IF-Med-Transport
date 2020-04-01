@@ -7,6 +7,7 @@ import {UserModule} from './user/user.module';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ApiHttpInterceptor} from './http.interceptor';
 import {MatSnackBarModule} from '@angular/material';
+import { NotFoundComponent } from './shared/error-page/not-found/not-found.component';
 
 @NgModule({
   declarations: [
