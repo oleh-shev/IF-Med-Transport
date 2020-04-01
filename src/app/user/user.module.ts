@@ -17,6 +17,7 @@ import { UserProfileComponent } from './user-profile/user-profile/user-profile.c
 import { MaterialModule } from '../shared/material-module/material.module';
 import { DriverBoardConfirmComponent } from './driver-board/driver-board-confirm/driver-board-confirm.component';
 import { AuthGuard } from '../guard/auth.guard';
+import { NotFoundComponent } from '../shared/error-page/not-found/not-found.component';
 
 
 
@@ -33,7 +34,9 @@ const routes: Routes = [
   },
   {
     path: 'driver-board', component: DriverBoardComponent, canActivate: [AuthGuard]
-  }
+  },
+  { path: '404', component: NotFoundComponent},
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({
@@ -51,6 +54,7 @@ const routes: Routes = [
     DriverBoardComponent,
     ReservationStatePipe,
     DriverBoardConfirmComponent,
+    NotFoundComponent
   ],
   exports: [
     UserComponent
