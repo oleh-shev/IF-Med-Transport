@@ -92,6 +92,10 @@ mat-form-field {
 }
 
 @media screen and (max-width: 670px){
+  .profile_information_content > h1 {
+    font-size: 2rem;
+  }
+ 
   .wrap {
     top: 10%;
   }
