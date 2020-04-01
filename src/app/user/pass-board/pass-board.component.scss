@@ -8,15 +8,15 @@ h1 {
     margin-bottom: 1em;
 }
 .list {
+    position: relative;
     display: flex;
-    margin-bottom: 0.5em;
-    padding: 0 0.5em;
+    padding: 0.2em;
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
     min-height: 35px;
 }
-.list:nth-of-type(2n) {
+.list:nth-of-type(2n+1) {
     background-color: #ececec;
 }
 .list__state {
@@ -48,6 +48,9 @@ h1 {
 }
 .hidden {
     display: none;
+}
+.list__info-comments {
+    font-size: 0.8em;
 }
 .search-box {
     display: flex;

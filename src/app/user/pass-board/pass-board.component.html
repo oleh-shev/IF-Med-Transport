@@ -32,6 +32,10 @@
         <span *ngIf="userTrip.trip.to_location_2"
           >({{ userTrip.trip.to_location_2.name }})
         </span>
+        <div class="list__info-comments" *ngIf="userTrip.driver_comments.length > 0">
+          Мій коментар: <em>{{userTrip.passenger_comments}} </em> 
+          Відповідь водія: <em>{{userTrip.driver_comments}} </em>
+        </div>
       </div>
       <div class="list__detailTrip">
           Водій: {{ userTrip.trip.driver.name }} {{ userTrip.trip.driver.phone_number }} 
@@ -45,9 +49,6 @@
         <span *ngIf="userTrip.trip.to_text_description.length > 0">
           можу довезу до: {{ userTrip.trip.to_text_description }}
         </span>
-      </div>
-      <div class="list__comments" *ngIf="userTrip.driver_comments.length > 0">
-        Мій коментар: {{userTrip.passenger_comments}} Відповідь водія: {{userTrip.driver_comments}}
       </div>
       <div class="list__button">
         <button 
