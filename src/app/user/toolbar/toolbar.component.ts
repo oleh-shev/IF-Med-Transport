@@ -28,7 +28,6 @@ export class ToolbarComponent implements OnInit {
     if (this.authService.isTokenAvailable()) {
       this.authService.getUserInfo()
       .subscribe((data: User) => {
-        console.log('How many times(toolbar)');
         this.authService.currentUser.next(data);
       });
     }
