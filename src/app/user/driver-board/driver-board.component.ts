@@ -37,11 +37,9 @@ export class DriverBoardComponent implements OnInit {
 
   private getUserTrips() {
     this.apiservice.getUserTrips().subscribe((res:any) => {
-      console.log(res.results);
       const results =  res.results;
       this.getTripWithReservation(results).subscribe( (res: any) => {
-        console.log(res);
-        this.driverTrips = res;
+         this.driverTrips = res;
         this.filterDriverTrips = this.driverTrips;
       }, this.boardService.error);
     }, this.boardService.error);
@@ -99,16 +97,30 @@ export class DriverBoardComponent implements OnInit {
     }
   }
 
+  changeViewResrvationBox(event) {
+    let target = event.target;
+    let outerBox: HTMLElement = target.closest('.list__reservation');
+    if (outerBox) {
+      let sublistBox = outerBox.querySelectorAll('.sublist');
+      sublistBox.forEach( item => {
+        item.classList.toggle('invisable');
+        if (item.classList.contains('invisable')) {
+          target.innerHTML = 'Заявки &#9660;';
+        } else {
+          target.innerHTML = 'Заявки &#9650;';
+        }
+      }); 
+    }
+  }
+
       /** Confirm reservation */
   openConfirmDialog(id: string, title: string, action: string, state: boolean): void {
     const data = {id, title, action, state};
-    console.log(data);
     this.boardService.modalDialog(DriverBoardConfirmComponent, data, (res: any) => this.confirmReservation(res));
   }
 
   private confirmReservation(res: any) {
     const {id, state, ...payload} = res;
-    console.log(payload);
     if (state) {
       this.apiservice.acceptTrip(id, payload).subscribe( (res: any) => {
         this.getUserTrips();

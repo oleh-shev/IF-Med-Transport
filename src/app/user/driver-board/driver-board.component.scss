@@ -9,6 +9,7 @@
 }
 h1 {
     font-size: 1.1em;
+    padding-left: 1em;
     margin-top: 0.6em;
     margin-bottom: 25px;
 
@@ -24,10 +25,11 @@ h1 {
     justify-content: space-between;
     align-items: center;
     min-height: 35px;
+    margin-bottom: 1em;
 }
-.list:nth-of-type(2n+1) {
+/* .list:nth-of-type(2n+1) {
     background-color: #ececec;
-}
+} */
 .list__state {
     font-weight: 700;
     text-transform: uppercase;
@@ -39,11 +41,9 @@ h1 {
 }
 .list__detailTrip {
     display: none;
-    flex-shrink: 1;
-    margin: 0.5em 3em;
+    margin: 0 0.1em;
 }
 .list__comments {
-    flex-shrink: 1;
     font-size: 0.9em;
 }
 .list__button {
@@ -53,15 +53,12 @@ h1 {
     margin-left: 0.5em;
     border-radius: 4px;
 }
-.visable {
-    display: block;
-}
 .hidden {
     display: none;
 }
 .list__reservation {
     position: relative;
-    border-top: 1px solid #000;
+    border-top: 2px solid #e6e6e6;
     margin-top: 15px;
     padding: 0.2em;
     padding-top: 15px;
@@ -71,37 +68,53 @@ h1 {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    width: 100%;
     padding: 0.5em 0.1em;
+    padding-left: 2em;
     min-height: 25px;
 
 }
 .list__title {
-    position: absolute;
+    position: relative;
     width: 150px;
     text-align: center;
-    top: -10px;
-    left: 140px;
-    background-color: #ececec;
-    border: 1px solid #000;
-    border-radius: 6px;;
+    top: -26px;
+    margin: 0 auto;
+    background-color: #f1f3f4;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    cursor: pointer;
 }
 .list__info-comments {
     font-size: 0.8em;
 }
-
+.visable {
+    display: block;
+}
+.invisable {
+    display: none;
+}
 @media all and (max-width: 450px) {
+    .container {
+        margin: 0 0.1em;
+    }
+    .filter-box {
+        margin-bottom: 1em;
+    }
     ::ng-deep .mat-form-field-infix {
         min-width: 150px !important;
         width: auto !important;
     }
-    .filter-box {
-        justify-content: space-between;
+    .list__detailTrip {
+        font-size: 0.85em;
     }
     .filter-box ::ng-deep .mat-stroked-button {
         padding: 0 10px !important;
-        min-width: 38px;
+        min-width: 75px;
         font-size: 12px;
+    }
+    .list {
+        font-size: 0.9em;
+        margin: 0.2em;
     }
     .list__state {
         font-size: 0.8em;
@@ -110,9 +123,25 @@ h1 {
         padding: 0px;
     }
     .list__button ::ng-deep .mat-stroked-button {
-        padding: 0 1px !important;
+        padding: 1px 3px !important;
+        font-size: 12px;
     }
-    .list__title {
-        left: 90px;
+    .sublist {
+        padding: 0.3em;
+    }
+}
+
+@media all and (max-width: 330px) { 
+    .filter-box ::ng-deep .mat-stroked-button {
+        padding: 0 8px !important;
+        min-width: 65px;
+    }
+    .list__button ::ng-deep .mat-stroked-button {
+        padding: 0 2px !important;
+        margin: 0 0 0 4px !important;
+        font-size: 12px;
+    }
+    .list__button {
+        padding-left: 0;
     }
 }

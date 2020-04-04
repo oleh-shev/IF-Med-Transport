@@ -28,7 +28,7 @@
       color="primary"
       (click)="filteringDriverTrips(stateTrip)">Всі</button>
   </div>
-  <div class="list listbox" *ngFor="let driverTrip of filterDriverTrips">
+  <div class="mat-elevation-z9 list listbox" *ngFor="let driverTrip of filterDriverTrips">
     <div class="list__state">{{ driverTrip.state | tripState }}</div>
     <div class="list__info">
       {{ driverTrip.departure_time | date: "dd.MM - hh:mm" }} -
@@ -78,7 +78,7 @@
       </button>
     </div>
     <div *ngIf="driverTrip.reservations.length" class="list__reservation">
-      <div class="list__title">Заявки</div>
+      <div class="list__title" (click)="changeViewResrvationBox($event)">Заявки &#9650;</div>
       <div class="sublist listbox" *ngFor="let userTrip of driverTrip.reservations">
         <div class="list__state">{{ userTrip.state | reservationState }}</div>
         <div class="list__info">
