@@ -69,7 +69,7 @@ mat-form-field {
       display: flex;
       flex-direction: row;
       justify-content: center;
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
 
       .profile_information{
           padding: 10px;
@@ -92,7 +92,20 @@ mat-form-field {
 }
 
 @media screen and (max-width: 670px){
-  .profile_card{
-    
+  .profile_information_content > h1 {
+    font-size: 2rem;
+  }
+ 
+  .wrap {
+    top: 10%;
+  }
+  .view__profile_container {
+    flex-wrap: wrap;
+  }
+  
+}
+@media screen and (min-width: 671px){
+  .profile_card {
+    min-width: 620px;
   }
 }
