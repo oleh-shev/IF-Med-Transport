@@ -158,7 +158,11 @@ export class PassBoardComponent implements OnInit {
 
     /** Reserved places */
   openReserveDialog(trip: FutureTrip): void {
-      this.boardService.modalDialog(PassBoardReserveComponent, trip, (res) => this.reservePlaces(res));
+      if (this.isLogged) {
+        this.boardService.modalDialog(PassBoardReserveComponent, trip, (res) => this.reservePlaces(res));
+      } else {
+        this.boardService.openSnackBar('Дана опція доступна лише авторизованим користувачам.');
+      }
   }
 
   private reservePlaces(value) {

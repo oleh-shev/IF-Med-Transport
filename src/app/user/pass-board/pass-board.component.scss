@@ -3,7 +3,7 @@
 }
 h1 {
     font-size: 1.1em;
-    margin: 1em 0;
+    margin: 1em;
 }
 .filter-box {
     display: flex;
@@ -22,10 +22,11 @@ h1 {
     justify-content: space-between;
     align-items: center;
     min-height: 35px;
+    margin-bottom: 0.8em;
 }
-.list:nth-of-type(2n+1) {
+/* .list:nth-of-type(2n+1) {
     background-color: #ececec;
-}
+} */
 .list__state {
     font-weight: 600;
     text-transform: uppercase;
@@ -74,19 +75,47 @@ h1 {
         min-width: 150px !important;
         width: auto !important;
     }
-    .filter-box {
-        justify-content: space-between;
+    .container {
+        margin: 0 0.1em;
     }
     .filter-box ::ng-deep .mat-stroked-button {
-        padding: 0 10px !important;
+        padding: 0 8px !important;
         min-width: 38px;
         font-size: 12px;
+    }
+    .list {
+        font-size: 0.9em;
     }
     .list__state {
         font-size: 0.8em;
     }
+    .list__detailTrip {
+        font-size: 0.85em;
+    }
     .search-box {
         padding: 0px;
     }
+    .list__button ::ng-deep .mat-stroked-button {
+        padding: 1px 3px !important;
+        font-size: 12px;
+    }
+    ::ng-deep .mat-select-value {
+        font-size: 14px !important;
+    }
 }
-
+@media all and (max-width: 330px) { 
+    .mat-form-field {
+        padding: 0 0.1em;
+    }
+    .filter-box ::ng-deep .mat-stroked-button {
+        padding: 0 4px !important;
+        min-width: 38px;
+    }
+    .list__button ::ng-deep .mat-stroked-button {
+        padding: 0 2px !important;
+        font-size: 12px;
+    }
+    .list__button {
+        padding-left: 0;
+    }
+}
